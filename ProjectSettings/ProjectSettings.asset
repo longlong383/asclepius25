@@ -952,9 +952,9 @@ PlayerSettings:
   metroPackageVersion: 1.0.0.0
   metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: umbgii
-  metroCertificateSubject: Insanity
-  metroCertificateIssuer: Insanity
-  metroCertificateNotAfter: 00f423080f34dc01
+  metroCertificateSubject: VASST Lab
+  metroCertificateIssuer: VASST Lab
+  metroCertificateNotAfter: 80ea9794d334dc01
   metroApplicationDescription: EvaluationToolDemo
   wsaImages:
     65636: 
