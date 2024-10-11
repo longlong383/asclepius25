@@ -136,7 +136,7 @@ MonoBehaviour:
       description: Toggle Profiler
       axisConstraint: 0
   - localizationKey: 
-    keyword: reset
+    keyword: reset scene
     keyCode: 0
     action:
       id: 0

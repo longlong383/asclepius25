@@ -32,6 +32,9 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         CoreServices.InputSystem?.RegisterHandler<IMixedRealitySpeechHandler>(this);
         startBlockBool = false;
         Debug1.text += "\nStarting Annotation System";
+        draw = true;
+        startBlockBool = true;
+        StartCoroutine(InstantiateCoroutine());
     }
 
     //method is only used for debugging purposes, to be commented out during gameplay on hololens
@@ -77,9 +80,9 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 }
                 break;
 
-            case "reset scene":
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                break;
+            //case "reset scene":
+            //    SceneManager.LoadScene("TrackingSample");
+            //    break;
 
             default:
                 Debug.Log($"Unknown option {eventData.Command.Keyword}");
@@ -94,18 +97,18 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         GameObject temp = Instantiate(lineRend);
         temp.transform.SetParent(parentHolderLineRenderer.transform);
         LineRenderer lineRenderer1 = temp.GetComponent<LineRenderer>();
-        lineRenderer1.startWidth = 0.003f;
-        lineRenderer1.endWidth = 0.003f;
-
+        lineRenderer1.startWidth = 0.002f;
+        lineRenderer1.endWidth = 0.002f;
+    
         while (draw)
         {
             // Reset the frame count
-            int frameCount = 0;
+            int frameCountBall = 0;
         
             // Wait for # frames before instantiating the object
-            while (frameCount < 20)
+            while (frameCountBall < 20)
             {
-                frameCount++;
+                frameCountBall++;
                 yield return null; // Wait for the next frame
             }
             Debug.Log("Instantiating annotation");
@@ -151,6 +154,11 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     private void endBlock()
     {
+        //GameObject temp = Instantiate(lineRend);
+        //temp.transform.SetParent(parentHolderLineRenderer.transform);
+        //LineRenderer lineRenderer1 = temp.GetComponent<LineRenderer>();
+        //lineRenderer1.startWidth = 0.002f;
+        //lineRenderer1.endWidth = 0.002f;
         if (draw)
         {
             Debug1.text += "\nStopping to draw";
@@ -164,6 +172,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             endBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.006f);
             endBlock.transform.position = lastChild.transform.position;
             endBlock.transform.rotation = lastChild.transform.rotation;
+
             Destroy(lastChild.gameObject);
             StopAllCoroutines();
         }
