@@ -1,27 +1,33 @@
 using System.Collections;
+using System.IO;
 using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 
 public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 {
     public TMP_Text Debug1;
-    public GameObject parentHolderBall,parentHolderLineRenderer;
+    public GameObject parentHolderBall,parentHolderLineRenderer, startEndHolder;
 
     public GameObject annotationObject, startEndBlock;
 
     private bool startBlockBool;
 
-    public bool draw;
+    [HideInInspector] public bool draw;
 
     public Material lineMaterial, startMaterial, endMaterial;
 
     public GameObject lineRend;
 
+    [HideInInspector] public string annotationName;
+
     void Start()
     {
+        annotationName = null;
         draw = false;
         CoreServices.InputSystem?.RegisterHandler<IMixedRealitySpeechHandler>(this);
         startBlockBool = false;
@@ -50,9 +56,10 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
             case "stop to draw":
                 endBlock();
+                ExportCoordinatesToCSV();
                 break;
 
-            case "reset":
+            case "reset annotations":
                 Debug1.text += "\nResetting";
                 Debug.Log("Resetting");
                 endBlock();
@@ -64,7 +71,14 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 {
                     Destroy(line.gameObject);
                 }
-                
+                foreach (Transform block in startEndHolder.transform)
+                {
+                    Destroy(block.gameObject);
+                }
+                break;
+
+            case "reset scene":
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 break;
 
             default:
@@ -80,6 +94,8 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         GameObject temp = Instantiate(lineRend);
         temp.transform.SetParent(parentHolderLineRenderer.transform);
         LineRenderer lineRenderer1 = temp.GetComponent<LineRenderer>();
+        lineRenderer1.startWidth = 0.003f;
+        lineRenderer1.endWidth = 0.003f;
 
         while (draw)
         {
@@ -94,23 +110,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             }
             Debug.Log("Instantiating annotation");
 
-            if (startBlockBool == true)
-            {
-                GameObject startBlock = Instantiate(startEndBlock, annotationObject.transform.position, annotationObject.transform.rotation);
-                startBlock.SetActive(true);
-                startBlock.transform.SetParent(parentHolderBall.transform);
-                startBlock.GetComponent<Renderer>().material = startMaterial;
-                startBlock.transform.localScale = new Vector3(0.0118f, 0.0118f, 0.0118f);
-                startBlockBool = false;
-            }
-            else
-            {
-                // Instantiate the annotation object at the parentHolder's position and rotation
-                GameObject newAnnotation = Instantiate(annotationObject, annotationObject.transform.position, annotationObject.transform.rotation);
-                newAnnotation.transform.SetParent(parentHolderBall.transform);
-                newAnnotation.transform.localScale = new Vector3(0.0118f, 0.0118f, 0.0118f);
-            }
-            
+
             // Adding Line Renderer component
 
             // Get the current number of points in the Line Renderer
@@ -121,6 +121,31 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
             // Set the new point at the end of the Line Renderer
             lineRenderer1.SetPosition(currentPoints, annotationObject.transform.position);
+
+            if (startBlockBool == true)
+            {
+                GameObject startBlock = Instantiate(startEndBlock, annotationObject.transform.position, annotationObject.transform.rotation);
+                startBlock.SetActive(true);
+                startBlock.transform.SetParent(startEndHolder.transform);
+                startBlock.GetComponent<Renderer>().material = startMaterial;
+                startBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.005f);
+                startBlockBool = false;
+            }
+            else
+            {
+                //getting the vector based off the points of the previous two line renderers
+                Vector3 direction = lineRenderer1.GetPosition(lineRenderer1.positionCount - 1) - lineRenderer1.GetPosition(lineRenderer1.positionCount - 2);
+
+                //adjusting the direction of the arrow
+                Quaternion quaternion = Quaternion.LookRotation(direction);
+                Quaternion offset = Quaternion.Euler(0,90,0);
+                quaternion = quaternion * offset;
+
+                // Instantiate the annotation object at the parentHolder's position and rotation
+                GameObject newAnnotation = Instantiate(annotationObject, annotationObject.transform.position, quaternion);
+                newAnnotation.transform.SetParent(parentHolderBall.transform);
+                newAnnotation.transform.localScale = new Vector3(0.3f, 0.3f, 0.6f);
+            }
         }
     }
 
@@ -134,13 +159,49 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             Transform lastChild = parentHolderBall.transform.GetChild(parentHolderBall.transform.childCount - 1);
             GameObject endBlock = Instantiate(startEndBlock, annotationObject.transform.position, annotationObject.transform.rotation);
             endBlock.SetActive(true);
-            endBlock.transform.SetParent(parentHolderBall.transform);
+            endBlock.transform.SetParent(startEndHolder.transform);
             endBlock.GetComponent<Renderer>().material = endMaterial;
-            endBlock.transform.localScale = new Vector3(0.0118f, 0.0118f, 0.0118f);
+            endBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.006f);
             endBlock.transform.position = lastChild.transform.position;
             endBlock.transform.rotation = lastChild.transform.rotation;
             Destroy(lastChild.gameObject);
             StopAllCoroutines();
         }
+    }
+
+    void ExportCoordinatesToCSV()
+    {
+        Transform lastChild = parentHolderLineRenderer.transform.GetChild(parentHolderLineRenderer.transform.childCount - 1);
+
+        if (lastChild.GetComponent<LineRenderer>() == null)
+        {
+            Debug1.text += "\nAn error has occured exporting the CSV";
+            return;
+        }
+
+        LineRenderer lineRenderer = lastChild.GetComponent<LineRenderer>();
+
+        // Combine it with the filename you want to access
+        string filePath = Path.Combine(Application.persistentDataPath, "Annotation_coordinates.csv");
+
+        // Open or create the CSV file
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            // Write header
+            writer.WriteLine("Index,X,Y,Z, Annotation Type");
+
+            // Loop through all the positions in the LineRenderer
+            for (int i = 0; i < lineRenderer.positionCount; i++)
+            {
+                // Get the position at index i
+                Vector3 position = lineRenderer.GetPosition(i);
+
+                // Write the index and coordinates to the CSV
+                writer.WriteLine($"{i},{position.x},{position.y},{position.z},{annotationName}");
+            }
+        }
+
+        Debug.Log($"Coordinates exported to {filePath}");
+        Debug1.text += $"\nFile Path name: {filePath}";
     }
 }
