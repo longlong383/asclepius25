@@ -80,14 +80,14 @@ MonoBehaviour:
       description: Toggle Profiler
       axisConstraint: 0
   - localizationKey: 
-    keyword: vertices
+    keyword: arrows
     keyCode: 0
     action:
       id: 0
       description: Toggle Profiler
       axisConstraint: 0
   - localizationKey: 
-    keyword: end points
+    keyword: start end points
     keyCode: 0
     action:
       id: 0

@@ -1,10 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 
@@ -25,6 +25,10 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     [HideInInspector] public string annotationName;
 
+    public List <Transform> thingsToReset = new List<Transform>();
+
+    private List<Transform> storage = new List<Transform>();
+
     void Start()
     {
         annotationName = null;
@@ -32,9 +36,14 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         CoreServices.InputSystem?.RegisterHandler<IMixedRealitySpeechHandler>(this);
         startBlockBool = false;
         Debug1.text += "\nStarting Annotation System";
-        draw = true;
-        startBlockBool = true;
-        StartCoroutine(InstantiateCoroutine());
+        foreach (Transform og in thingsToReset)
+        {
+            // Instantiate creates a new GameObject, including the Transform, at the same position/rotation/scale
+            Transform copy = Instantiate(og, og.position, og.rotation);
+            copy.gameObject.SetActive(false);
+            // Optionally, add the new copy to a list for later use
+            storage.Add(copy);
+        }
     }
 
     //method is only used for debugging purposes, to be commented out during gameplay on hololens
@@ -66,23 +75,19 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 Debug1.text += "\nResetting";
                 Debug.Log("Resetting");
                 endBlock();
-                foreach (Transform child in parentHolderBall.transform)
-                {
-                    Destroy(child.gameObject);
-                }
-                foreach (Transform line in parentHolderLineRenderer.transform)
-                {
-                    Destroy(line.gameObject);
-                }
-                foreach (Transform block in startEndHolder.transform)
-                {
-                    Destroy(block.gameObject);
-                }
+                destroyEverything();
                 break;
 
-            //case "reset scene":
-            //    SceneManager.LoadScene("TrackingSample");
-            //    break;
+            case "reset scene":
+                Debug1.text += "\nResetting scene";
+                for (int i = 0; i < thingsToReset.Count; i++)
+                {
+                    thingsToReset[i].position = storage[i].position;
+                    thingsToReset[i].rotation = storage[i].rotation;
+                    thingsToReset[i].localScale = storage[i].localScale;
+                }
+                destroyEverything();
+                break;
 
             default:
                 Debug.Log($"Unknown option {eventData.Command.Keyword}");
@@ -90,6 +95,21 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         }
     }
 
+    private void destroyEverything()
+    {
+        foreach (Transform child in parentHolderBall.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform line in parentHolderLineRenderer.transform)
+        {
+            Destroy(line.gameObject);
+        }
+        foreach (Transform block in startEndHolder.transform)
+        {
+            Destroy(block.gameObject);
+        }
+    }
     private IEnumerator InstantiateCoroutine()
     {
         Debug1.text += "\nFirst Point";
@@ -99,16 +119,18 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         LineRenderer lineRenderer1 = temp.GetComponent<LineRenderer>();
         lineRenderer1.startWidth = 0.002f;
         lineRenderer1.endWidth = 0.002f;
-    
+
+        int frameCountBall = 0;
         while (draw)
         {
             // Reset the frame count
-            int frameCountBall = 0;
+            int frameCount = 0;
         
             // Wait for # frames before instantiating the object
-            while (frameCountBall < 20)
+            while (frameCount < 20)
             {
                 frameCountBall++;
+                frameCount++;
                 yield return null; // Wait for the next frame
             }
             Debug.Log("Instantiating annotation");
@@ -134,7 +156,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 startBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.005f);
                 startBlockBool = false;
             }
-            else
+            else if (frameCountBall == 40) 
             {
                 //getting the vector based off the points of the previous two line renderers
                 Vector3 direction = lineRenderer1.GetPosition(lineRenderer1.positionCount - 1) - lineRenderer1.GetPosition(lineRenderer1.positionCount - 2);
@@ -148,6 +170,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 GameObject newAnnotation = Instantiate(annotationObject, annotationObject.transform.position, quaternion);
                 newAnnotation.transform.SetParent(parentHolderBall.transform);
                 newAnnotation.transform.localScale = new Vector3(0.3f, 0.3f, 0.6f);
+                frameCountBall = 0;
             }
         }
     }
@@ -156,9 +179,9 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     {
         //GameObject temp = Instantiate(lineRend);
         //temp.transform.SetParent(parentHolderLineRenderer.transform);
-        //LineRenderer lineRenderer1 = temp.GetComponent<LineRenderer>();
-        //lineRenderer1.startWidth = 0.002f;
-        //lineRenderer1.endWidth = 0.002f;
+        Transform temp = parentHolderLineRenderer.transform.GetChild(parentHolderLineRenderer.transform.childCount -1);
+        LineRenderer lastLine = temp.GetComponent<LineRenderer>();
+
         if (draw)
         {
             Debug1.text += "\nStopping to draw";
@@ -170,10 +193,26 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             endBlock.transform.SetParent(startEndHolder.transform);
             endBlock.GetComponent<Renderer>().material = endMaterial;
             endBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.006f);
-            endBlock.transform.position = lastChild.transform.position;
-            endBlock.transform.rotation = lastChild.transform.rotation;
 
-            Destroy(lastChild.gameObject);
+            if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount-1))
+            {
+                endBlock.transform.position = lastChild.transform.position;
+                endBlock.transform.rotation = lastChild.transform.rotation;
+                Destroy(lastChild.gameObject);
+            }
+            else
+            {
+                //getting the vector based off the points of the previous two line renderers
+                Vector3 direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
+
+                //adjusting the direction of the arrow
+                Quaternion quaternion = Quaternion.LookRotation(direction);
+                Quaternion offset = Quaternion.Euler(0, 90, 0);
+                quaternion = quaternion * offset;
+                endBlock.transform.rotation = quaternion;
+                endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
+            }
+            
             StopAllCoroutines();
         }
     }

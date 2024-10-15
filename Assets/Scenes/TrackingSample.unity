@@ -15129,7 +15129,7 @@ MonoBehaviour:
   startDimensionIndex: 1
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: end points
+  voiceCommand: start end points
   voiceRequiresFocus: 0
   profiles:
   - Target: {fileID: 238942077}
@@ -15259,7 +15259,7 @@ GameObject:
   - component: {fileID: 1813233115}
   - component: {fileID: 1813233122}
   m_Layer: 0
-  m_Name: Vertices
+  m_Name: arrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15589,7 +15589,7 @@ MonoBehaviour:
   startDimensionIndex: 1
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: vertices
+  voiceCommand: arrows
   voiceRequiresFocus: 0
   profiles:
   - Target: {fileID: 1929374183}
@@ -17044,6 +17044,11 @@ MonoBehaviour:
   endMaterial: {fileID: 2100000, guid: e0991baa7c482ff468469ea0d2d0f575, type: 2}
   lineRend: {fileID: 2071181132}
   annotationName: 
+  thingsToReset:
+  - {fileID: 982297796}
+  - {fileID: 397398510928173171}
+  - {fileID: 1290651949}
+  - {fileID: 604121195}
 --- !u!114 &2011384728
 MonoBehaviour:
   m_ObjectHideFlags: 0
