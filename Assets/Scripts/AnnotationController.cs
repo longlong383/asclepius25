@@ -10,32 +10,55 @@ using UnityEngine;
 
 public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 {
+    //debug window text used to display debug messages
     public TMP_Text Debug1;
+
+    //gameobjects used to hold the annotations
+    /*
+     * parentBallholdr holds the arrows during gameplay
+     * parentHolderLineRenderer holds the linerenderer components
+     * startend holder holds the start and end points of the annotations
+     */
     public GameObject parentHolderBall,parentHolderLineRenderer, startEndHolder;
 
+
+    //annotationObject holds the arrow prefab that is instantiated along the linerenderer/annotations
+    //startendblock holds the cube prefabs used to mark the start and end of an annotation
     public GameObject annotationObject, startEndBlock;
 
+    //bool used to mark when an annotation is starting 
     private bool startBlockBool;
 
+    //bool used to signify whether or not an annotation is being drawn
     [HideInInspector] public bool draw;
 
+    //materials used to colorcoat the annotations
     public Material lineMaterial, startMaterial, endMaterial;
 
+    //gameobject used to create multiple line renderers
     public GameObject lineRend;
 
+    //string used to mark what type of annotation it is
     [HideInInspector] public string annotationName;
 
+    //gameObjects in scene to reset upon command
     public List <Transform> thingsToReset = new List<Transform>();
 
+    //original positions of the gameObjects at the start of gameplay from thingsToReset
     private List<Transform> storage = new List<Transform>();
 
     void Start()
     {
+        //setting up variables
         annotationName = null;
         draw = false;
-        CoreServices.InputSystem?.RegisterHandler<IMixedRealitySpeechHandler>(this);
         startBlockBool = false;
+
+        //accessing speech handlder
+        CoreServices.InputSystem?.RegisterHandler<IMixedRealitySpeechHandler>(this);
         Debug1.text += "\nStarting Annotation System";
+
+        //Getting original positions of everything, and restore everything back to their original positions upon command
         foreach (Transform og in thingsToReset)
         {
             // Instantiate creates a new GameObject, including the Transform, at the same position/rotation/scale
@@ -53,8 +76,10 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     public void OnSpeechKeywordRecognized(SpeechEventData eventData)
     {
+        //voice command structure
         switch (eventData.Command.Keyword.ToLower())
         {
+            //annotations start to annotatte
             case "start to draw":
                 if (!draw)
                 {
@@ -65,19 +90,19 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                     StartCoroutine(InstantiateCoroutine());
                 }
                 break;
-
+            //stop annotating
             case "stop to draw":
                 endBlock();
                 ExportCoordinatesToCSV();
                 break;
-
+            //delete all annotations
             case "reset annotations":
                 Debug1.text += "\nResetting";
                 Debug.Log("Resetting");
                 endBlock();
                 destroyEverything();
                 break;
-
+            //reset entire scene
             case "reset scene":
                 Debug1.text += "\nResetting scene";
                 for (int i = 0; i < thingsToReset.Count; i++)
@@ -95,6 +120,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         }
     }
 
+    //destroys all annotations
     private void destroyEverything()
     {
         foreach (Transform child in parentHolderBall.transform)
@@ -110,17 +136,20 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             Destroy(block.gameObject);
         }
     }
+    //continuously running function for annotating
     private IEnumerator InstantiateCoroutine()
     {
         Debug1.text += "\nFirst Point";
 
+        //instantiating new annotating by creating new line renderer
         GameObject temp = Instantiate(lineRend);
         temp.transform.SetParent(parentHolderLineRenderer.transform);
         LineRenderer lineRenderer1 = temp.GetComponent<LineRenderer>();
         lineRenderer1.startWidth = 0.002f;
         lineRenderer1.endWidth = 0.002f;
-
+        //int value used to mark when 40 frames have been achieved
         int frameCountBall = 0;
+
         while (draw)
         {
             // Reset the frame count
@@ -147,6 +176,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             // Set the new point at the end of the Line Renderer
             lineRenderer1.SetPosition(currentPoints, annotationObject.transform.position);
 
+            //used to instantiate start block for the start of an annotation
             if (startBlockBool == true)
             {
                 GameObject startBlock = Instantiate(startEndBlock, annotationObject.transform.position, annotationObject.transform.rotation);
@@ -156,6 +186,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 startBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.005f);
                 startBlockBool = false;
             }
+            //used to instantiate arrow prefabs along line renderer everying 40 frames
             else if (frameCountBall == 40) 
             {
                 //getting the vector based off the points of the previous two line renderers
@@ -177,8 +208,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     private void endBlock()
     {
-        //GameObject temp = Instantiate(lineRend);
-        //temp.transform.SetParent(parentHolderLineRenderer.transform);
+        //method used to access last linernedrer component in the linerendrerer dump
         Transform temp = parentHolderLineRenderer.transform.GetChild(parentHolderLineRenderer.transform.childCount -1);
         LineRenderer lastLine = temp.GetComponent<LineRenderer>();
 
@@ -187,6 +217,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             Debug1.text += "\nStopping to draw";
             Debug.Log("Stopping to draw");
             draw = false;
+            //setting up the position, rotation of the end block
             Transform lastChild = parentHolderBall.transform.GetChild(parentHolderBall.transform.childCount - 1);
             GameObject endBlock = Instantiate(startEndBlock, annotationObject.transform.position, annotationObject.transform.rotation);
             endBlock.SetActive(true);
@@ -194,14 +225,21 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             endBlock.GetComponent<Renderer>().material = endMaterial;
             endBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.006f);
 
+            //there are two scenarios for instantiating the last block
+            /* scenario one, the last block's position is the same as the last arrow prefab, so it replaces it
+             * scenario two, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
+             */
+
             if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount-1))
             {
+                //scenario one
                 endBlock.transform.position = lastChild.transform.position;
                 endBlock.transform.rotation = lastChild.transform.rotation;
                 Destroy(lastChild.gameObject);
             }
             else
             {
+                //scenario two
                 //getting the vector based off the points of the previous two line renderers
                 Vector3 direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
 
@@ -217,10 +255,13 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         }
     }
 
+    //exporting coordinates to the csv
     void ExportCoordinatesToCSV()
     {
+        //accessing annotation previous completed
         Transform lastChild = parentHolderLineRenderer.transform.GetChild(parentHolderLineRenderer.transform.childCount - 1);
 
+        //use case scenario for when there are no actual annotations to export
         if (lastChild.GetComponent<LineRenderer>() == null)
         {
             Debug1.text += "\nAn error has occured exporting the CSV";
@@ -251,5 +292,11 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
         Debug.Log($"Coordinates exported to {filePath}");
         Debug1.text += $"\nFile Path name: {filePath}";
+    }
+
+    //insignficant function for writing debug statements
+    public void addText(string placeHolder)
+    {
+        Debug1.text += $"\n{placeHolder}";
     }
 }

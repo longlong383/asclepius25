@@ -10,6 +10,10 @@ public class SetTransformFromMatrix : MonoBehaviour
 
     public Matrix4x4 targetMatrix;
 
+    public GameObject StylusToWorld;
+
+    private Matrix4x4 matr;
+
     void Awake()
     {
         targetMatrix = Matrix4x4.identity;
@@ -19,9 +23,15 @@ public class SetTransformFromMatrix : MonoBehaviour
         targetMatrix.SetColumn(2, column3);
         targetMatrix.SetColumn(3, column4);
 
-        //targetMatrix = MatrixExtensions.FlipTransformRightLeft(targetMatrix);
+        targetMatrix = MatrixExtensions.FlipTransformRightLeft(targetMatrix);
+
 
 
         this.transform.SetPositionAndRotation(targetMatrix.ExtractPosition(), targetMatrix.ExtractRotation());
+    }
+    private void Update()
+    {
+        matr = StylusToWorld.transform.localToWorldMatrix * targetMatrix;
+        this.transform.SetLocalPositionAndRotation(matr.ExtractPosition(), matr.ExtractRotation());
     }
 }
