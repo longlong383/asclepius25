@@ -179,7 +179,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             //used to instantiate start block for the start of an annotation
             if (startBlockBool == true)
             {
-                GameObject startBlock = Instantiate(startEndBlock, annotationObject.transform.position, annotationObject.transform.rotation);
+                GameObject startBlock = Instantiate(startEndBlock, annotationObject.transform.position, Quaternion.Euler(0f, 0f, 0f));
                 startBlock.SetActive(true);
                 startBlock.transform.SetParent(startEndHolder.transform);
                 startBlock.GetComponent<Renderer>().material = startMaterial;
@@ -219,7 +219,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             draw = false;
             //setting up the position, rotation of the end block
             Transform lastChild = parentHolderBall.transform.GetChild(parentHolderBall.transform.childCount - 1);
-            GameObject endBlock = Instantiate(startEndBlock, annotationObject.transform.position, annotationObject.transform.rotation);
+            GameObject endBlock = Instantiate(startEndBlock, annotationObject.transform.position, Quaternion.Euler(0f, 0f, 0f));
             endBlock.SetActive(true);
             endBlock.transform.SetParent(startEndHolder.transform);
             endBlock.GetComponent<Renderer>().material = endMaterial;
@@ -227,14 +227,14 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
             //there are two scenarios for instantiating the last block
             /* scenario one, the last block's position is the same as the last arrow prefab, so it replaces it
-             * scenario two, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
-             */
+                * scenario two, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
+                */
 
-            if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount-1))
+            if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount - 1))
             {
                 //scenario one
                 endBlock.transform.position = lastChild.transform.position;
-                endBlock.transform.rotation = lastChild.transform.rotation;
+                endBlock.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 Destroy(lastChild.gameObject);
             }
             else
@@ -243,14 +243,9 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 //getting the vector based off the points of the previous two line renderers
                 Vector3 direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
 
-                //adjusting the direction of the arrow
-                Quaternion quaternion = Quaternion.LookRotation(direction);
-                Quaternion offset = Quaternion.Euler(0, 90, 0);
-                quaternion = quaternion * offset;
-                endBlock.transform.rotation = quaternion;
                 endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
             }
-            
+
             StopAllCoroutines();
         }
     }
@@ -271,13 +266,23 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         LineRenderer lineRenderer = lastChild.GetComponent<LineRenderer>();
 
         // Combine it with the filename you want to access
-        string filePath = Path.Combine(Application.persistentDataPath, "Annotation_coordinates.csv");
+        string filePathAnnotation = Path.Combine(Application.persistentDataPath, "Annotation_coordinates_line_renderer.csv");
 
         // Open or create the CSV file
-        using (StreamWriter writer = new StreamWriter(filePath, true))
+        using (StreamWriter writer = new StreamWriter(filePathAnnotation, true))
         {
             // Write header
-            writer.WriteLine("Index,X,Y,Z, Annotation Type");
+            writer.WriteLine("start");
+            //output annotation type
+            /*
+             * generalCorrection
+             * Sutures
+             * Incision
+             * Excision
+             * Insertion
+             * Exploration
+             */
+            writer.WriteLine($"{annotationName}");
 
             // Loop through all the positions in the LineRenderer
             for (int i = 0; i < lineRenderer.positionCount; i++)
@@ -286,12 +291,13 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 Vector3 position = lineRenderer.GetPosition(i);
 
                 // Write the index and coordinates to the CSV
-                writer.WriteLine($"{i},{position.x},{position.y},{position.z},{annotationName}");
+                writer.WriteLine($"{i},{position.x},{position.y},{position.z}");
             }
+            writer.WriteLine("end");
         }
 
-        Debug.Log($"Coordinates exported to {filePath}");
-        Debug1.text += $"\nFile Path name: {filePath}";
+        Debug.Log($"Coordinates exported to {filePathAnnotation}");
+        Debug1.text += $"\nFile Path name: {filePathAnnotation}";
     }
 
     //insignficant function for writing debug statements
