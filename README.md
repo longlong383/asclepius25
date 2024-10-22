@@ -1,6 +1,6 @@
 # Medical Trainee Evaluation Tool
 
-This project is made by a co-op student from the University of Waterloo, Aric Quan, in conjuction with a 4th year software engineering capstone team at the University of Western, Yi Wen Deng, Maria Paula Garcia Beltran, Mohamed hady Toman and Malcolm Melo Fonseca, under the supervision of of Dr. Peter Wang and Dr. Elvis Chen at the Robarts Research Institute
+This project is made by a co-op student from the University of Waterloo, Aric Quan, in conjuction with a 4th year software engineering capstone team at the University of Western, Yi Wen Deng, Maria Paula Garcia Beltran, and Malcolm Melo Fonseca, under the supervision of of Dr. Peter Wang and Dr. Elvis Chen at the Robarts Research Institute
 
 ## Acknowledgements
 The hololens plugin project that this dll is based on: https://github.com/petergu684/HoloLens2-ResearchMode-Unity
