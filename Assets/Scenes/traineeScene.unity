@@ -648,7 +648,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e320f9084a4163b4395b6b432d33fa28,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e320f9084a4163b4395b6b432d33fa28,
         type: 3}
@@ -1557,11 +1557,17 @@ MonoBehaviour:
   startEndHolder: {fileID: 690168709}
   annotationObject: {fileID: 2037260865}
   startEndBlock: {fileID: 1552992550}
-  draw: 0
   lineMaterial: {fileID: 2100000, guid: 73e70026df58f924080b0b07712c010a, type: 2}
   startMaterial: {fileID: 2100000, guid: 32e65e65819c542489eba7ef068d6381, type: 2}
   endMaterial: {fileID: 2100000, guid: e0991baa7c482ff468469ea0d2d0f575, type: 2}
   lineRend: {fileID: 2071181132}
+  listMaterials:
+  - {fileID: 2100000, guid: 73e70026df58f924080b0b07712c010a, type: 2}
+  - {fileID: 2100000, guid: ea6efe0888266294295ed12fec844e3e, type: 2}
+  - {fileID: 2100000, guid: 59cbbbe2f0e98704f9849572912775df, type: 2}
+  - {fileID: 2100000, guid: f59ec96c730901647988a241a1b4838d, type: 2}
+  - {fileID: 2100000, guid: e426dd9146fc6984bafd1ceef23c9574, type: 2}
+  - {fileID: 2100000, guid: ee2fd57814f0b0b4cb7a95b3f8195402, type: 2}
 --- !u!1001 &2037260863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1572,7 +1578,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 093f627c262ea334993e08570b5dd4b3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 093f627c262ea334993e08570b5dd4b3,
         type: 3}
@@ -1724,8 +1730,7 @@ LineRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 73e70026df58f924080b0b07712c010a, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

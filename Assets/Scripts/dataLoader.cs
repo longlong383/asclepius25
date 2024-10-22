@@ -31,10 +31,10 @@ public class dataLoader : MonoBehaviour
     private bool startBlockBool;
 
     //bool used to signify whether or not an annotation is being drawn
-    [HideInInspector] public bool draw;
+    //[HideInInspector] public bool draw;
 
     //materials used to colorcoat the annotations
-    public Material lineMaterial, startMaterial, endMaterial;
+    public Material startMaterial, endMaterial;
 
     //gameobject used to create multiple line renderers
     public GameObject lineRend;
@@ -42,12 +42,16 @@ public class dataLoader : MonoBehaviour
     //int used to track when to instantiate arrows
     private int arrowCount;
 
+    //reference to the line renderer being modified and updated
     private LineRenderer lineRenderer1;
+
+    //List of line materials
+    public List<Material> listMaterials = new List<Material> ();
     void Start()
     {
-        draw = false;
         startBlockBool = false;
         arrowCount = 0;
+
         try
         {
             filePathAnnotation = Path.Combine(Application.persistentDataPath, "Annotation_coordinates_line_renderer.csv");
@@ -67,7 +71,6 @@ public class dataLoader : MonoBehaviour
         // Use a try block to handle file reading, but keep yield returns outside
         try
         {
-            Debug.Log("test1");
             // Read all lines from the CSV file
             row = File.ReadAllLines(filePath);  // Can throw exception
         }
@@ -78,12 +81,10 @@ public class dataLoader : MonoBehaviour
         }
 
         bool getInfo = false;
-        Debug.Log("test2");
 
         for (int i = 0; i < row.Length; i++)
         {
             string temp = row[i];
-            Debug.Log("\ntest3");
 
             if (temp == "start")
             {
@@ -94,62 +95,102 @@ public class dataLoader : MonoBehaviour
                 lineRenderer1.endWidth = 0.002f;
                 startBlockBool = true;
                 arrowCount = 0;
-                i++;
-                getInfo = true;
-                Debug.Log("\ngothere");
                 continue;
             }
             if (temp == "end")
             {
                 getInfo = false;
                 lineRenderer1 = null;
+
                 endBlock();
-                Debug.Log("\nend");
+                //StopAllCoroutines();
                 continue;
             }
 
             string[] values = temp.Split(',');
 
-            if (IsNumeric(values[1]) && IsNumeric(values[2]) && IsNumeric(values[3]) && getInfo == true)
+            if (getInfo == true)
             {
-                float x = float.Parse(values[1]);
-                float y = float.Parse(values[2]);
-                float z = float.Parse(values[3]);
-
+                float x = 0;
+                float y = 0;
+                float z = 0;
+                try
+                {
+                    x = float.Parse(values[1]);
+                    y = float.Parse(values[2]);
+                    z = float.Parse(values[3]);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError("Following error occured extracting data: " + ex.Message);
+                }
                 Vector3 point = new Vector3(x, y, z);
-                Debug.Log($"\nX: {point.x} Y: {point.y} Z: {point.z}");
-
                 // Move the coroutine call outside the try-catch block
                 yield return StartCoroutine(InstantiateCoroutine(point));  // You can safely yield here
             }
+            else
+            {
+                temp = temp.ToLower();
+                Debug.Log(temp);
+                getInfo = true;
+                switch (temp)
+                {
+                    //output annotation type
+                    /*
+                     * generalCorrection
+                     * Sutures
+                     * Incision
+                     * Excision
+                     * Insertion
+                     * Exploration
+                     */
+                    case "generalcorrection":
+                        lineRenderer1.material = listMaterials[0];
+                        break;
+
+                    case "sutures":
+                        lineRenderer1.material = listMaterials[1];
+                        break;
+
+                    case "incision":
+                        lineRenderer1.material = listMaterials[2];
+                        break;
+
+                    case "excision":
+                        lineRenderer1.material = listMaterials[3];
+                        break;
+
+                    case "insertion":
+                        lineRenderer1.material = listMaterials[4];
+                        break;
+
+                    case "exploration":
+                        lineRenderer1.material = listMaterials[5];
+                        break;
+
+                    default:
+                        Debug.Log(temp + ". here's the error");
+                        Debug.LogError("An error has occured");
+                        break;    
+                }       
+            }
         }
     }
-
-
-
-    // Helper function to check if a string is numeric
-    bool IsNumeric(string value)
-    {
-        return float.TryParse(value, out _);
-    }
-
     private IEnumerator InstantiateCoroutine(Vector3 newPosition)
     {
         if (lineRenderer1 == null)
         {
             string parentName = lineRenderer1.transform.parent.name;
-            Debug.Log("Parent GameObject's Name: " + parentName);
             Debug.LogError("lineRenderer1 is not set! Make sure it is initialized before calling InstantiateCoroutine.");
             yield break;  // Stop the coroutine if lineRenderer1 is null
         }
         else
         {
             string parentName = lineRenderer1.transform.parent.name;
-            Debug.Log("Parent GameObject's Name: " + parentName);
         }
         //Reset the frame count
         int frameCount = 0;
-        Debug.Log("hello" + newPosition);
+
         // Wait for # frames before instantiating the object
         while (frameCount < 20)
         {
@@ -159,7 +200,6 @@ public class dataLoader : MonoBehaviour
         Debug.Log("Instantiating annotation");
 
         // Adding Line Renderer component
-
         try
         {
             // Get the current number of points in the Line Renderer
@@ -190,7 +230,6 @@ public class dataLoader : MonoBehaviour
         //used to instantiate arrow prefabs along line renderer everying 40 frames
         else if (arrowCount == 2)
         {
-            Debug.Log("test23");
             //getting the vector based off the points of the previous two line renderers
             Vector3 direction = lineRenderer1.GetPosition(lineRenderer1.positionCount - 1) - lineRenderer1.GetPosition(lineRenderer1.positionCount - 2);
 
@@ -217,7 +256,6 @@ public class dataLoader : MonoBehaviour
  
         Debug1.text += "\nStopping to draw";
         Debug.Log("Stopping to draw");
-        draw = false;
         //setting up the position, rotation of the end block
         Transform lastChild = parentHolderBall.transform.GetChild(parentHolderBall.transform.childCount - 1);
         GameObject endBlock = Instantiate(startEndBlock, annotationObject.transform.position, Quaternion.Euler(0f, 0f, 0f));
@@ -245,9 +283,6 @@ public class dataLoader : MonoBehaviour
             Vector3 direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
 
             endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
-        }
-
-        StopAllCoroutines();
-        
+        }  
     }
 }
