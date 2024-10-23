@@ -24,7 +24,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     //annotationObject holds the arrow prefab that is instantiated along the linerenderer/annotations
     //startendblock holds the cube prefabs used to mark the start and end of an annotation
-    public GameObject annotationObject, startEndBlock;
+    public GameObject referenceSphere, annotationObject, startEndBlock;
 
     //bool used to mark when an annotation is starting 
     private bool startBlockBool;
@@ -33,7 +33,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     [HideInInspector] public bool draw;
 
     //materials used to colorcoat the annotations
-    public Material lineMaterial, startMaterial, endMaterial;
+    public Material lineMaterial, startMaterial, endMaterial, onMaterial, offMaterial;
 
     //gameobject used to create multiple line renderers
     public GameObject lineRend;
@@ -46,6 +46,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     //original positions of the gameObjects at the start of gameplay from thingsToReset
     private List<Transform> storage = new List<Transform>();
+
 
     void Start()
     {
@@ -111,6 +112,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                     thingsToReset[i].rotation = storage[i].rotation;
                     thingsToReset[i].localScale = storage[i].localScale;
                 }
+                referenceSphere.GetComponent<Renderer>().material = offMaterial;
                 destroyEverything();
                 break;
 
@@ -149,6 +151,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         lineRenderer1.endWidth = 0.002f;
         //int value used to mark when 40 frames have been achieved
         int frameCountBall = 0;
+        referenceSphere.GetComponent<Renderer>().material = onMaterial;
 
         while (draw)
         {
@@ -245,7 +248,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
                 endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
             }
-
+            referenceSphere.GetComponent<Renderer>().material = offMaterial;
             StopAllCoroutines();
         }
     }

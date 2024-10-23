@@ -1,3 +1,4 @@
+using Microsoft.MixedReality.Toolkit.UI;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
@@ -5,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class dataLoader : MonoBehaviour
 {
@@ -47,6 +49,9 @@ public class dataLoader : MonoBehaviour
 
     //List of line materials
     public List<Material> listMaterials = new List<Material> ();
+
+    //test button
+    public Interactable button;
     void Start()
     {
         startBlockBool = false;
@@ -55,11 +60,17 @@ public class dataLoader : MonoBehaviour
         try
         {
             filePathAnnotation = Path.Combine(Application.persistentDataPath, "Annotation_coordinates_line_renderer.csv");
+            Debug1.text += "\n" + filePathAnnotation;
         }
         catch (Exception ex)
         {
             Debug.LogError("Error extracting file: " + ex.Message);
+            Debug1.text += "\n" + "Error extracting file: " + ex.Message;
         }
+        button.OnClick.AddListener(startLoading);
+    }
+    private void startLoading()
+    {
         StartCoroutine(ReadCSV(filePathAnnotation));
     }
 

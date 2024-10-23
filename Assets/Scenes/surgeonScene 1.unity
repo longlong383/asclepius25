@@ -6793,7 +6793,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e320f9084a4163b4395b6b432d33fa28,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e320f9084a4163b4395b6b432d33fa28,
         type: 3}
@@ -10178,6 +10178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef4af134c95f1945a9a0dcefdbea5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textMesh: {fileID: 0}
 --- !u!1 &1302440031
 GameObject:
   m_ObjectHideFlags: 0
@@ -17098,12 +17099,15 @@ MonoBehaviour:
   parentHolderBall: {fileID: 923804053}
   parentHolderLineRenderer: {fileID: 509497689}
   startEndHolder: {fileID: 690168709}
+  referenceSphere: {fileID: 1462418047}
   annotationObject: {fileID: 2037260865}
   startEndBlock: {fileID: 1552992550}
   draw: 0
   lineMaterial: {fileID: 2100000, guid: 73e70026df58f924080b0b07712c010a, type: 2}
   startMaterial: {fileID: 2100000, guid: 32e65e65819c542489eba7ef068d6381, type: 2}
   endMaterial: {fileID: 2100000, guid: e0991baa7c482ff468469ea0d2d0f575, type: 2}
+  onMaterial: {fileID: 2100000, guid: e480bee88ffc7ea4391320bb2eba8455, type: 2}
+  offMaterial: {fileID: 2100000, guid: cb7428004eeb07241bf1020c7f9ad349, type: 2}
   lineRend: {fileID: 2071181132}
   annotationName: 
   thingsToReset:
