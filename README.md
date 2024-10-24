@@ -37,3 +37,7 @@ A. Keller, HoloLens 2 Infrared Retro-Reflector Tracking. https://github.com/andr
 
 ```
 A. Martin-Gomez et al., “STTAR: Surgical Tool Tracking using Off-the-Shelf Augmented Reality Head-Mounted Displays,” IEEE Transactions on Visualization and Computer Graphics, pp. 1–16, 2023, doi: 10.1109/TVCG.2023.3238309.
+
+## Known Problems
+
+It's known that during deployment, a WSA certificate error will pop up in visual studio. To avoid this, you can copy and paste the UnityCommon.props file into the build folder replacing the Unity generated one, which should solve the problem.

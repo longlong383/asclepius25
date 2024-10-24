@@ -3,7 +3,7 @@ using Microsoft.MixedReality.Toolkit.SpatialAwareness;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-//unused script
+//unused script, supposed to grab scene mesh information
 public class meshGrabber : MonoBehaviour
 {
     private List<IMixedRealitySpatialAwarenessMeshObserver> spatialObservers = new List<IMixedRealitySpatialAwarenessMeshObserver>();

@@ -54,9 +54,10 @@ public class dataLoader : MonoBehaviour
     public Interactable button;
     void Start()
     {
+        //setting default values for some variables
         startBlockBool = false;
         arrowCount = 0;
-
+        //getting data
         try
         {
             filePathAnnotation = Path.Combine(Application.persistentDataPath, "Annotation_coordinates_line_renderer.csv");
@@ -76,6 +77,7 @@ public class dataLoader : MonoBehaviour
 
     private IEnumerator ReadCSV(string filePath)
     {
+        //setting some variables null
         lineRenderer1 = null;
         string[] row = null;
 
@@ -97,8 +99,12 @@ public class dataLoader : MonoBehaviour
         {
             string temp = row[i];
 
+            //multiple if statements checking to see if it is the start, end, of an annotation, if data that's being read from the row in the csv 
+            //is readable, or if it's denoting the type of annotation 
+            //side note this could be simplified
             if (temp == "start")
             {
+                //instantiating a linerenderer that will hold the coordinates for the annotations
                 GameObject temp1 = Instantiate(lineRend);
                 lineRenderer1 = temp1.GetComponent<LineRenderer>();
                 temp1.transform.SetParent(parentHolderLineRenderer.transform);
@@ -110,18 +116,22 @@ public class dataLoader : MonoBehaviour
             }
             if (temp == "end")
             {
+                //stopping the draw system, and dereference the linerenderer
                 getInfo = false;
                 lineRenderer1 = null;
 
                 endBlock();
-                //StopAllCoroutines();
+
                 continue;
             }
 
-            string[] values = temp.Split(',');
+            
+            
 
             if (getInfo == true)
             {
+                //getting transform position data
+                string[] values = temp.Split(',');
                 float x = 0;
                 float y = 0;
                 float z = 0;
@@ -136,11 +146,12 @@ public class dataLoader : MonoBehaviour
                     Debug.LogError("Following error occured extracting data: " + ex.Message);
                 }
                 Vector3 point = new Vector3(x, y, z);
-                // Move the coroutine call outside the try-catch block
-                yield return StartCoroutine(InstantiateCoroutine(point));  // You can safely yield here
+                // start to add a coordinate to the line renderer
+                yield return StartCoroutine(InstantiateCoroutine(point));  
             }
             else
             {
+                //if all if statements above are false, it must be a string denoting the annotation type
                 temp = temp.ToLower();
                 Debug.Log(temp);
                 getInfo = true;
@@ -199,7 +210,7 @@ public class dataLoader : MonoBehaviour
         {
             string parentName = lineRenderer1.transform.parent.name;
         }
-        //Reset the frame count
+        //Reset the frame count, so that the code only runs every 20 frames during gameplay
         int frameCount = 0;
 
         // Wait for # frames before instantiating the object
@@ -221,6 +232,7 @@ public class dataLoader : MonoBehaviour
       
             // Set the new point at the end of the Line Renderer
             lineRenderer1.SetPosition(currentPoints, newPosition);
+            //arrowCount is an int used to count and ensure that an arrow prefab is only instantiating once for every two annotation coordaintes
             arrowCount++;
         }
         catch (Exception e)
