@@ -68,7 +68,6 @@ public class dataLoader : MonoBehaviour
             Debug.LogError("Error extracting file: " + ex.Message);
             Debug1.text += "\n" + "Error extracting file: " + ex.Message;
         }
-        StartCoroutine(ReadCSV(filePathAnnotation));
         button.OnClick.AddListener(startLoading);
     }
     private void startLoading()
