@@ -39,7 +39,6 @@ public class panicWarning : MonoBehaviour
 
             audioSourceWarning.Play();
             yield return new WaitForSeconds(0.2f);
-            audioSourceWarning.Pause();
         }
     }
 
@@ -54,7 +53,6 @@ public class panicWarning : MonoBehaviour
 
             annotationIncoming.Play();
             yield return new WaitForSeconds(0.4f);
-            annotationIncoming.Pause();
         }
     }
 }
