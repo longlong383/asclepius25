@@ -14,16 +14,16 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/traineeScene.unity
     guid: a92707ad82ee12b4db1a954a51cdc727
   - enabled: 0
-    path: Assets/Scenes/annotationDemo 1.unity
-    guid: 78df55a7422819a4ea07de5f4ba0ba78
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: Assets/Scenes/surgeonScene 1.unity
     guid: e066defd4902ae943ba2fd3230c383cf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/annotationDemo.unity
     guid: d83f7a0306c12fd489c77b3154b84345
   m_configObjects:
