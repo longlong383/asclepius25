@@ -47,6 +47,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     //original positions of the gameObjects at the start of gameplay from thingsToReset
     private List<Transform> storage = new List<Transform>();
 
+    public Transform torso;
 
     void Start()
     {
@@ -77,49 +78,64 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     public void OnSpeechKeywordRecognized(SpeechEventData eventData)
     {
-        //voice command structure
         switch (eventData.Command.Keyword.ToLower())
         {
-            //annotations start to annotatte
             case "start to draw":
-                if (!draw)
-                {
-                    Debug1.text += "\nStarting to draw";
-                    Debug.Log("Starting to draw");
-                    draw = true;
-                    startBlockBool = true;
-                    StartCoroutine(InstantiateCoroutine());
-                }
+                StartDrawing();
                 break;
-            //stop annotating
             case "stop to draw":
-                endBlock();
-                ExportCoordinatesToCSV();
+                StopDrawing();
                 break;
-            //delete all annotations
             case "reset annotations":
-                Debug1.text += "\nResetting";
-                Debug.Log("Resetting");
-                endBlock();
-                destroyEverything();
+                ResetAnnotations();
                 break;
-            //reset entire scene
             case "reset scene":
-                Debug1.text += "\nResetting scene";
-                for (int i = 0; i < thingsToReset.Count; i++)
-                {
-                    thingsToReset[i].position = storage[i].position;
-                    thingsToReset[i].rotation = storage[i].rotation;
-                    thingsToReset[i].localScale = storage[i].localScale;
-                }
-                referenceSphere.GetComponent<Renderer>().material = offMaterial;
-                destroyEverything();
+                ResetScene();
                 break;
-
             default:
                 Debug.Log($"Unknown option {eventData.Command.Keyword}");
                 break;
         }
+    }
+
+    // Case-specific methods
+    public void StartDrawing()
+    {
+        if (!draw)
+        {
+            Debug1.text += "\nStarting to draw";
+            Debug.Log("Starting to draw");
+            draw = true;
+            startBlockBool = true;
+            StartCoroutine(InstantiateCoroutine());
+        }
+    }
+
+    public void StopDrawing()
+    {
+        endBlock();
+        ExportCoordinatesToCSV();
+    }
+
+    private void ResetAnnotations()
+    {
+        Debug1.text += "\nResetting";
+        Debug.Log("Resetting");
+        endBlock();
+        destroyEverything();
+    }
+
+    private void ResetScene()
+    {
+        Debug1.text += "\nResetting scene";
+        for (int i = 0; i < thingsToReset.Count; i++)
+        {
+            thingsToReset[i].position = storage[i].position;
+            thingsToReset[i].rotation = storage[i].rotation;
+            thingsToReset[i].localScale = storage[i].localScale;
+        }
+        referenceSphere.GetComponent<Renderer>().material = offMaterial;
+        destroyEverything();
     }
 
     //destroys all annotations

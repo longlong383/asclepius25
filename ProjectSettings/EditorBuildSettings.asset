@@ -14,8 +14,8 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/traineeScene.unity
+  - enabled: 0
+    path: Assets/Scenes/testingScene.unity
     guid: a92707ad82ee12b4db1a954a51cdc727
   - enabled: 0
     path: 
@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/annotationDemo.unity
     guid: d83f7a0306c12fd489c77b3154b84345
+  - enabled: 1
+    path: Assets/Scenes/Mk2handAnnotationDemo.unity
+    guid: bd1745915490d854180c0f59e2f2fc42
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: a9b2142c24aad574eb8f369b110105ca,
       type: 2}
