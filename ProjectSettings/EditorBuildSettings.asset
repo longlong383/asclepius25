@@ -6,26 +6,53 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Scenes/SceneManager.unity
+    guid: 3c7532b28f68faf47a9a7260add9a222
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.8.2/Scene System Resources/DefaultManagerScene.unity
+    guid: ae7bb08d297fb69408695d8de0962524
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.8.2/Scene System Resources/DefaultLightingScene.unity
+    guid: 7e54e36c44f826c438c95da79f8de638
   - enabled: 0
+    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.8.2/Scene System Resources/DefaultLightingScene.unity
+    guid: 7e54e36c44f826c438c95da79f8de638
+  - enabled: 0
+    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.8.2/Scene System Resources/DefaultLightingScene.unity
+    guid: 7e54e36c44f826c438c95da79f8de638
+  - enabled: 0
+    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.8.2/Scene System Resources/DefaultLightingScene.unity
+    guid: 7e54e36c44f826c438c95da79f8de638
+  - enabled: 0
+    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.8.2/Scene System Resources/DefaultLightingScene.unity
+    guid: 7e54e36c44f826c438c95da79f8de638
+  - enabled: 0
+    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.8.2/Scene System Resources/DefaultLightingScene.unity
+    guid: 7e54e36c44f826c438c95da79f8de638
+  - enabled: 0
+    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.8.2/Scene System Resources/DefaultLightingScene.unity
+    guid: 7e54e36c44f826c438c95da79f8de638
+  - enabled: 0
+    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.8.2/Scene System Resources/DefaultLightingScene.unity
+    guid: 7e54e36c44f826c438c95da79f8de638
+  - enabled: 1
+    path: Assets/Scenes/startupScene.unity
+    guid: 3da09073198644a97a9c92e45bd55706
+  - enabled: 1
+    path: Assets/Scenes/modeSelectionScene.unity
+    guid: fe9c8fd1885824b3f8949590750d6b75
+  - enabled: 1
     path: Assets/Scenes/traineeScene.unity
     guid: a92707ad82ee12b4db1a954a51cdc727
-  - enabled: 0
-    path: Assets/Scenes/annotationDemo 1.unity
-    guid: 78df55a7422819a4ea07de5f4ba0ba78
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/surgeonScene 1.unity
     guid: e066defd4902ae943ba2fd3230c383cf
   - enabled: 1
-    path: Assets/Scenes/annotationDemo.unity
-    guid: d83f7a0306c12fd489c77b3154b84345
+    path: Assets/Scenes/loginScene.unity
+    guid: c5aacdee2482f46f59cbb0a3b6acf68a
+  - enabled: 1
+    path: Assets/Scenes/SceneManager.unity
+    guid: 3c7532b28f68faf47a9a7260add9a222
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: a9b2142c24aad574eb8f369b110105ca,
       type: 2}
