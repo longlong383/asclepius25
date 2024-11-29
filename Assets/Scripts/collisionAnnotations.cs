@@ -16,13 +16,6 @@ public class collisionAnnotations : MonoBehaviour
             annotationController.StartDrawing();
         }
     }
-
-    // Called while another collider stays within the trigger
-    private void OnTriggerStay(Collider other)
-    {
-        //Debug.Log("Object is still in the trigger: " + other.name);
-    }
-
     // Called when another collider exits the trigger
     private void OnTriggerExit(Collider other)
     {

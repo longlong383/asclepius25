@@ -6,17 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/ManagerScene.unity
+    guid: e49913f9b04bbe84e914338398f476ab
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/testingScene.unity
-    guid: a92707ad82ee12b4db1a954a51cdc727
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
@@ -26,9 +23,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/annotationDemo.unity
     guid: d83f7a0306c12fd489c77b3154b84345
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Mk2handAnnotationDemo.unity
     guid: bd1745915490d854180c0f59e2f2fc42
+  - enabled: 0
+    path: Assets/Scenes/handAnnotationDemo.unity
+    guid: 60ab96c4b40281248987da619ab08a38
+  - enabled: 0
+    path: Assets/Scenes/traineeScene 1.unity
+    guid: 5fd8f334e4c7a8c4bba827df66766cb1
+  - enabled: 1
+    path: Assets/Scenes/testingScene.unity
+    guid: a92707ad82ee12b4db1a954a51cdc727
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: a9b2142c24aad574eb8f369b110105ca,
       type: 2}
