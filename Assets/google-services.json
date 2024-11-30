@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "677954940034",
+    "project_id": "capstone-5b7dd",
+    "storage_bucket": "capstone-5b7dd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677954940034:android:79ece71f1210747a40989b",
+        "android_client_info": {
+          "package_name": "com.PTCInc.VuforiaEngine"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcmJQ7n5R3PvxznM2f9GSd0_qmJsxSlG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
