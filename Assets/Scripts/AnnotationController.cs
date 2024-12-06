@@ -49,12 +49,16 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     public Transform torso;
 
+    public Transform annotationTracker;
+
     void Start()
     {
         //setting up variables
         annotationName = null;
         draw = false;
         startBlockBool = false;
+
+        annotationTracker = null;
 
         //accessing speech handlder
         CoreServices.InputSystem?.RegisterHandler<IMixedRealitySpeechHandler>(this);
@@ -78,6 +82,10 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     public void OnSpeechKeywordRecognized(SpeechEventData eventData)
     {
+        if (checkConnection() == false)
+        {
+            return;
+        }
         switch (eventData.Command.Keyword.ToLower())
         {
             case "start to draw":
@@ -157,6 +165,19 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     //continuously running function for annotating
     private IEnumerator InstantiateCoroutine()
     {
+        if (FindObjectOfType<BooleanSync>() == null)
+        {
+            yield return null;
+        }
+        else
+        {
+            BooleanSync booleanSync = FindObjectOfType<BooleanSync>();
+
+            if (booleanSync.returnIsConnected() == false)
+            {
+                yield return null;
+            } 
+        }
         Debug1.text += "\nFirst Point";
 
         //instantiating new annotating by creating new line renderer
@@ -183,7 +204,15 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             }
             Debug.Log("Instantiating annotation");
 
-
+            if (annotationTracker != null)
+            {
+                annotationTracker.transform.position = annotationObject.transform.position;
+            }
+            else
+            {
+                Debug.LogError("Transform annotation tracker not properly connected to network");
+                yield return null;
+            }
             // Adding Line Renderer component
 
             // Get the current number of points in the Line Renderer
@@ -323,5 +352,23 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     public void addText(string placeHolder)
     {
         Debug1.text += $"\n{placeHolder}";
+    }
+
+    public void setupAnnotationTracker(Transform transform)
+    {
+        annotationTracker = transform;
+    }
+
+    private bool checkConnection()
+    {
+        if (FindObjectOfType<BooleanSync>() != null)
+        {
+            BooleanSync booleanSync = FindObjectOfType<BooleanSync>();
+            if (booleanSync.returnIsConnected() == true)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

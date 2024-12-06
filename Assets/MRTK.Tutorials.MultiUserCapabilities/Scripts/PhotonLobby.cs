@@ -47,12 +47,18 @@ namespace MRTK.Tutorials.MultiUserCapabilities
 
             var roomOptions = new RoomOptions { IsVisible = true, IsOpen = true, MaxPlayers = 10 };
             PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
+            PhotonNetwork.AutomaticallySyncScene = false;
             //PhotonNetwork.JoinRandomRoom();
         }
 
-        public override void OnJoinedRoom()
+        public override void OnJoinedRoom() 
         {
             base.OnJoinedRoom();
+            if (FindObjectOfType<BooleanSync>() != null)
+            {
+                BooleanSync booleanSync = FindObjectOfType<BooleanSync>();
+                booleanSync.setIsConnected(true);
+            }
 
             Debug.Log("\nPhotonLobby.OnJoinedRoom()");
             Debug.Log("Current room name: " + PhotonNetwork.CurrentRoom.Name);

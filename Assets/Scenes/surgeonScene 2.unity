@@ -17115,6 +17115,7 @@ MonoBehaviour:
   - {fileID: 397398510928173171}
   - {fileID: 4679913628749430502}
   - {fileID: 604121195}
+  torso: {fileID: 0}
 --- !u!114 &2011384728
 MonoBehaviour:
   m_ObjectHideFlags: 0

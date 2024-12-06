@@ -17,8 +17,7 @@ public class handIndexAccess : MonoBehaviour
         {
             objectToAttach.transform.localPosition = pose.Position; // Optional: Adjust as needed
             objectToAttach.transform.localRotation = pose.Rotation; // Optional: Adjust as needed
-
-            Debug.Log("Object successfully attached as a child to the finger tip.");
+            //Debug.Log("Object successfully attached as a child to the finger tip.");
         }
     }
 }
