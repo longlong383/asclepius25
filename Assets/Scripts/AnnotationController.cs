@@ -5,6 +5,8 @@ using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
 using TMPro;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 
 
@@ -49,7 +51,9 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     public Transform torso;
 
-    public Transform annotationTracker;
+    [HideInInspector] public Transform annotationTracker;
+
+    private BooleanSync booleanSync;
 
     void Start()
     {
@@ -167,17 +171,21 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     {
         if (FindObjectOfType<BooleanSync>() == null)
         {
-            yield return null;
+            StopAllCoroutines();
         }
-        else
-        {
-            BooleanSync booleanSync = FindObjectOfType<BooleanSync>();
 
-            if (booleanSync.returnIsConnected() == false)
-            {
-                yield return null;
-            } 
-        }
+        booleanSync = FindObjectOfType<BooleanSync>();
+
+        if (booleanSync.returnIsConnected() == false)
+        {
+            StopAllCoroutines();
+        } 
+  
+        Debug.Log("boolean status before: " + booleanSync.returnIsDrawing());
+        booleanSync.setIsDrawing(true);
+
+        Debug.Log("boolean status after: " + booleanSync.returnIsDrawing());
+
         Debug1.text += "\nFirst Point";
 
         //instantiating new annotating by creating new line renderer
@@ -294,6 +302,12 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
             }
             referenceSphere.GetComponent<Renderer>().material = offMaterial;
+            if (FindObjectOfType<BooleanSync>() != null)
+            {
+                booleanSync = FindObjectOfType<BooleanSync>();
+
+                booleanSync.setIsDrawing(false);
+            }
             StopAllCoroutines();
         }
     }
@@ -363,7 +377,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     {
         if (FindObjectOfType<BooleanSync>() != null)
         {
-            BooleanSync booleanSync = FindObjectOfType<BooleanSync>();
+            booleanSync = FindObjectOfType<BooleanSync>();
             if (booleanSync.returnIsConnected() == true)
             {
                 return true;

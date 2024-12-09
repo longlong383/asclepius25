@@ -54,16 +54,22 @@ namespace MRTK.Tutorials.MultiUserCapabilities
         public override void OnJoinedRoom() 
         {
             base.OnJoinedRoom();
-            if (FindObjectOfType<BooleanSync>() != null)
-            {
-                BooleanSync booleanSync = FindObjectOfType<BooleanSync>();
-                booleanSync.setIsConnected(true);
-            }
-
             Debug.Log("\nPhotonLobby.OnJoinedRoom()");
             Debug.Log("Current room name: " + PhotonNetwork.CurrentRoom.Name);
             Debug.Log("Other players in room: " + PhotonNetwork.CountOfPlayersInRooms);
             Debug.Log("Total players in room: " + (PhotonNetwork.CountOfPlayersInRooms + 1));
+            BooleanSync booleanSync;
+
+            if (FindObjectOfType<BooleanSync>() != null)
+            {
+                booleanSync = FindObjectOfType<BooleanSync>();
+                //Debug.Log("Status connected before: " + booleanSync.returnIsConnected());
+                booleanSync.setIsConnected(true);
+                //Debug.Log("Status connected before: " + booleanSync.returnIsConnected());
+                //booleanSync.setIsDrawing(true);
+                //for some reason, the line above works here, but not in other scripts ...
+                booleanSync.setupEverything();
+            }
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)

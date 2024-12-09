@@ -2361,18 +2361,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &1895304096 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7916557576929228339, guid: 9a7c24f281a2c3d45a9b8befe608bf77,
-    type: 3}
-  m_PrefabInstance: {fileID: 539081599}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1410eac1ae94b4d4492a09cc368e152c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1935472408
 GameObject:
   m_ObjectHideFlags: 0
@@ -2578,9 +2566,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2011384725}
-  - component: {fileID: 2011384726}
   - component: {fileID: 2011384727}
   - component: {fileID: 2011384728}
+  - component: {fileID: 2011384730}
+  - component: {fileID: 2011384729}
   m_Layer: 0
   m_Name: TrackingController
   m_TagString: Untagged
@@ -2605,35 +2594,6 @@ Transform:
   m_Father: {fileID: 1203101464}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2011384726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011384724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e4f63b63d908544ad689cce7154112, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Debug1: {fileID: 1799819292639288077}
-  parentHolderBall: {fileID: 923804053}
-  parentHolderLineRenderer: {fileID: 509497689}
-  startEndHolder: {fileID: 690168709}
-  annotationObject: {fileID: 2037260865}
-  startEndBlock: {fileID: 1552992550}
-  startMaterial: {fileID: 2100000, guid: 32e65e65819c542489eba7ef068d6381, type: 2}
-  endMaterial: {fileID: 2100000, guid: e0991baa7c482ff468469ea0d2d0f575, type: 2}
-  lineRend: {fileID: 2071181132}
-  listMaterials:
-  - {fileID: 2100000, guid: 73e70026df58f924080b0b07712c010a, type: 2}
-  - {fileID: 2100000, guid: ea6efe0888266294295ed12fec844e3e, type: 2}
-  - {fileID: 2100000, guid: 59cbbbe2f0e98704f9849572912775df, type: 2}
-  - {fileID: 2100000, guid: f59ec96c730901647988a241a1b4838d, type: 2}
-  - {fileID: 2100000, guid: e426dd9146fc6984bafd1ceef23c9574, type: 2}
-  - {fileID: 2100000, guid: ee2fd57814f0b0b4cb7a95b3f8195402, type: 2}
-  button: {fileID: 1895304096}
 --- !u!114 &2011384727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2666,6 +2626,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   annotationTrackerParentHolder: {fileID: 181776782}
+--- !u!114 &2011384729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011384724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ce4c62a5d078347bc5475e8f0d2211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2011384730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011384724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6715e31297696c94d9bc026df9c7525f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Debug1: {fileID: 1799819292639288077}
+  parentHolderBall: {fileID: 923804053}
+  parentHolderLineRenderer: {fileID: 509497689}
+  startEndHolder: {fileID: 690168709}
+  annotationObject: {fileID: 2037260865}
+  startEndBlock: {fileID: 1552992550}
+  startMaterial: {fileID: 2100000, guid: 32e65e65819c542489eba7ef068d6381, type: 2}
+  endMaterial: {fileID: 2100000, guid: e0991baa7c482ff468469ea0d2d0f575, type: 2}
+  lineRend: {fileID: 2071181132}
+  listMaterials:
+  - {fileID: 2100000, guid: 73e70026df58f924080b0b07712c010a, type: 2}
+  - {fileID: 2100000, guid: ea6efe0888266294295ed12fec844e3e, type: 2}
+  - {fileID: 2100000, guid: 59cbbbe2f0e98704f9849572912775df, type: 2}
+  - {fileID: 2100000, guid: f59ec96c730901647988a241a1b4838d, type: 2}
+  - {fileID: 2100000, guid: e426dd9146fc6984bafd1ceef23c9574, type: 2}
+  - {fileID: 2100000, guid: ee2fd57814f0b0b4cb7a95b3f8195402, type: 2}
+  annotationTracker: {fileID: 0}
 --- !u!1001 &2037260863
 PrefabInstance:
   m_ObjectHideFlags: 0

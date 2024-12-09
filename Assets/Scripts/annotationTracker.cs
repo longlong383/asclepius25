@@ -59,6 +59,13 @@ public class annotationTracker : MonoBehaviour
             Debug.Log("Tracker Setup");
         }
 
+        if (FindObjectOfType<dataStreamer>() != null)
+        {
+            dataStreamer dataStreamer = FindObjectOfType<dataStreamer>();
+            dataStreamer.setupAnnotationTracker(newChild.transform);
+            Debug.Log("Tracker Setup");
+        }
+
         yield break;
     }
 
