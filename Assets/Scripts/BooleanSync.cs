@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BooleanSync : MonoBehaviourPunCallbacks
 {
+
     protected const string BooleanKey = "isDrawing";
     protected const string BooleanKey1 = "isConnected";
     protected const string StringKey = "annotationType";
@@ -26,7 +27,7 @@ public class BooleanSync : MonoBehaviourPunCallbacks
         }
     }
 
-    // Set the boolean property
+    //Set the boolean property
     public void setIsDrawing(bool value)
     {
         defaultProperties[BooleanKey] = value;
@@ -39,12 +40,14 @@ public class BooleanSync : MonoBehaviourPunCallbacks
         }
     }
 
+
     // Get the boolean property
     public bool returnIsDrawing()
     {
         if (PhotonNetwork.CurrentRoom != null &&
             PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(BooleanKey, out var value))
         {
+            Debug.Log("Accesing directly fromd defaultPropertie1s: " + defaultProperties[BooleanKey]);
             Debug.Log("error check here: " + (bool)value);
             return (bool)value;
         }
@@ -89,4 +92,5 @@ public class BooleanSync : MonoBehaviourPunCallbacks
         }
         return (string)defaultProperties[StringKey];
     }
+
 }

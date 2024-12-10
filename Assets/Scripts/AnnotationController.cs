@@ -166,6 +166,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             Destroy(block.gameObject);
         }
     }
+
     //continuously running function for annotating
     private IEnumerator InstantiateCoroutine()
     {
@@ -179,11 +180,13 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         if (booleanSync.returnIsConnected() == false)
         {
             StopAllCoroutines();
-        } 
-  
+        }
+
         Debug.Log("boolean status before: " + booleanSync.returnIsDrawing());
         booleanSync.setIsDrawing(true);
-
+        //mental note, it takes a bit of time for this bool to be sent to the network, hence the time delay is needed to provide
+        //an actual reading of the boolean
+        yield return new WaitForSeconds(0.1f);
         Debug.Log("boolean status after: " + booleanSync.returnIsDrawing());
 
         Debug1.text += "\nFirst Point";
@@ -264,6 +267,11 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     private void endBlock()
     {
+        if (checkConnection() == false)
+        {
+            return;
+        }
+
         //method used to access last linernedrer component in the linerendrerer dump
         Transform temp = parentHolderLineRenderer.transform.GetChild(parentHolderLineRenderer.transform.childCount -1);
         LineRenderer lastLine = temp.GetComponent<LineRenderer>();

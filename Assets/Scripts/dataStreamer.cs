@@ -61,25 +61,26 @@ public class dataStreamer : MonoBehaviour
     private Queue<Func<IEnumerator>> transformTransport = new Queue<Func<IEnumerator>>();
 
 
-    private bool isProcessing = false;
+    private bool isProcessing;
 
     private Vector3 lastPosition;
 
     void Start()
     {
         //setting default values for some variables
-        startBlockBool = false;
+        startBlockBool = true;
         arrowCount = 0;
         lineRenderer1 = null;
         if (FindObjectOfType<BooleanSync>() != null)
         {
             booleanSync = FindObjectOfType<BooleanSync>();
-            CheckBoolRoutine(booleanSync.returnIsDrawing());
+            CheckBoolRoutine();
         }
         else
         {
             Debug.LogError("Error retrieving boolean drawing condition. Gameplay will be affected");
         }
+        isProcessing = false;   
     }
 
     private IEnumerator ProcessQueueContinuously()
@@ -102,18 +103,6 @@ public class dataStreamer : MonoBehaviour
         }
     }
 
-    private IEnumerator CheckBoolRoutine(bool targetBool)
-    {
-        // Continuously check the boolean
-        while (!targetBool)
-        {
-            yield return null; // Wait for the next frame
-        }
-
-        ProcessQueueContinuously();
-        CheckPositionChanges();
-    }
-
     private IEnumerator CheckPositionChanges()
     {
         while (true)
@@ -127,11 +116,27 @@ public class dataStreamer : MonoBehaviour
             }
             if (booleanSync.returnIsDrawing() == false)
             {
-
+                yield return new WaitForSeconds(0.25f);
+                StopCoroutine(ProcessQueueContinuously());
+                endBlock();
+                break;
             }
             // Check position every 0.1 seconds
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    private IEnumerator CheckBoolRoutine()
+    {
+        // Continuously check the boolean
+        while (!booleanSync.returnIsDrawing())
+        {
+            Debug.Log("still stuck");
+            yield return null; // Wait for the next frame
+        }
+        Debug.Log("Annotation streaming commencing");
+        ProcessQueueContinuously();
+        CheckPositionChanges();
     }
 
     private IEnumerator InstantiateCoroutine(Vector3 newPosition)
@@ -250,7 +255,8 @@ public class dataStreamer : MonoBehaviour
 
             endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
         }
-        CheckBoolRoutine(booleanSync.returnIsDrawing());
+        startBlockBool = true;
+        CheckBoolRoutine();
     }
 
     public void setupAnnotationTracker(Transform transform)

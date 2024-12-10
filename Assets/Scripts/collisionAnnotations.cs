@@ -9,6 +9,7 @@ public class collisionAnnotations : MonoBehaviour
     // Called when another collider enters the trigger
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("connection status: " + checkConnection());
         // Example: Do something when an object enters the trigger
         if (other.CompareTag("Phantom") && checkConnection() == true)
         {
