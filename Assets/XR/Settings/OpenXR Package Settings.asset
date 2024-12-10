@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Name: Standalone
   m_EditorClassIdentifier: 
   features:
+  - {fileID: 5533137583985117100}
   - {fileID: 548370944327360571}
   - {fileID: -9089513925746402657}
   - {fileID: -7222993618749989133}
@@ -230,10 +231,9 @@ MonoBehaviour:
   - {fileID: 840160389856205886}
   - {fileID: -1578965894756211292}
   - {fileID: -848023125412737984}
+  - {fileID: 6614607708409475122}
   - {fileID: -8791059146223512874}
   - {fileID: 8995949134377107359}
-  - {fileID: 6614607708409475122}
-  - {fileID: 5533137583985117100}
   m_renderMode: 1
   m_depthSubmissionMode: 2
 --- !u!114 &-5729495224798859738
@@ -776,7 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f34c86d1a130cc45a438373e1e8a4fc, type: 3}
   m_Name: PlayModeRemotingPlugin Standalone
   m_EditorClassIdentifier: 
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Holographic Remoting for Play Mode
   version: 1.5.1
   featureIdInternal: com.microsoft.openxr.feature.playmoderemoting

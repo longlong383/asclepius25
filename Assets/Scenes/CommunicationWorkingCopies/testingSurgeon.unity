@@ -8432,26 +8432,23 @@ MonoBehaviour:
   states: {fileID: 11400000, guid: e51893c8eb7938e4ba43985af43c0f72, type: 2}
   InputActionId: 0
   isGlobal: 0
-  Dimensions: 2
+  Dimensions: 1
   dimensionIndex: 0
-  startDimensionIndex: 0
-  CanSelect: 0
-  CanDeselect: 0
+  startDimensionIndex: 1
+  CanSelect: 1
+  CanDeselect: 1
   voiceCommand: Select
   voiceRequiresFocus: 0
   profiles:
   - Target: {fileID: 1640064324}
     Themes:
     - {fileID: 11400000, guid: 0c4c73f326f602744bdcfff481fd6f20, type: 2}
-    - {fileID: 0}
   - Target: {fileID: 1569259435}
     Themes:
     - {fileID: 11400000, guid: 8f8cfb3041153fa45bccb6d664a563ec, type: 2}
-    - {fileID: 0}
   - Target: {fileID: 1946985735}
     Themes:
     - {fileID: 11400000, guid: 087b16002c2b0b445baa3ed3beae44a9, type: 2}
-    - {fileID: 0}
   OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -8623,7 +8620,7 @@ MonoBehaviour:
       - Near Only
       - Far Only
   resetOnDestroy: 0
-  enabledOnStart: 0
+  enabledOnStart: 1
 --- !u!114 &1181640631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13592,7 +13589,7 @@ MonoBehaviour:
   isGlobal: 0
   Dimensions: 2
   dimensionIndex: 0
-  startDimensionIndex: 1
+  startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
   voiceCommand: start end points
@@ -14052,7 +14049,7 @@ MonoBehaviour:
   isGlobal: 0
   Dimensions: 2
   dimensionIndex: 0
-  startDimensionIndex: 1
+  startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
   voiceCommand: arrows
