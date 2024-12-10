@@ -167,6 +167,11 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         }
     }
 
+    public void callDestroyEverything()
+    {
+        destroyEverything();
+    }
+
     //continuously running function for annotating
     private IEnumerator InstantiateCoroutine()
     {
@@ -200,7 +205,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         //int value used to mark when 40 frames have been achieved
         int frameCountBall = 0;
         referenceSphere.GetComponent<Renderer>().material = onMaterial;
-
+        Debug.Log("annotationtype: " + booleanSync.returnAnnotationType());
         while (draw)
         {
             // Reset the frame count
@@ -245,6 +250,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 startBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.005f);
                 startBlockBool = false;
             }
+
             //used to instantiate arrow prefabs along line renderer everying 40 frames
             else if (frameCountBall == 40) 
             {

@@ -137,11 +137,56 @@ public class dataStreamer : MonoBehaviour
             yield return null; // Wait for the next frame
                 
         }
-        yield return new WaitForSeconds(0.1f);
-        // Continuously check the boolean
+        yield return new WaitForSeconds(0.3f);
+
+        // setting up the line renderer
         GameObject temp1 = Instantiate(lineRend);
         lineRenderer1 = temp1.GetComponent<LineRenderer>();
         temp1.transform.SetParent(parentHolderLineRenderer.transform);
+
+        //setting up annotation material
+        switch (booleanSync.returnAnnotationType())
+        {
+            //output annotation type
+            /*
+             * generalCorrection
+             * Sutures
+             * Incision
+             * Excision
+             * Insertion
+             * Exploration
+             */
+            case "generalcorrection":
+                lineRenderer1.material = listMaterials[0];
+                break;
+
+            case "sutures":
+                lineRenderer1.material = listMaterials[1];
+                break;
+
+            case "incision":
+                lineRenderer1.material = listMaterials[2];
+                break;
+
+            case "excision":
+                lineRenderer1.material = listMaterials[3];
+                break;
+
+            case "insertion":
+                lineRenderer1.material = listMaterials[4];
+                break;
+
+            case "exploration":
+                lineRenderer1.material = listMaterials[5];
+                break;
+
+            default:
+                Debug.Log(booleanSync.returnAnnotationType() + ". here's the error");
+                Debug.LogError("An error has occured");
+                break;
+        }
+
+        // starting annotation systems
         Debug.Log("Annotation streaming commencing");
         StartCoroutine(ProcessQueueContinuously());
         StartCoroutine(CheckPositionChanges());
@@ -273,6 +318,7 @@ public class dataStreamer : MonoBehaviour
 
             endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
         }
+        arrowCount = 0;
         startBlockBool = true;
         StartCoroutine(CheckBoolRoutine());
     }

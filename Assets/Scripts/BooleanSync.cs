@@ -8,13 +8,20 @@ public class BooleanSync : MonoBehaviourPunCallbacks
 
     protected const string BooleanKey = "isDrawing";
     protected const string BooleanKey1 = "isConnected";
+    protected const string BooleanKey2 = "deletion";
+    protected const string BooleanKey3 = "arrows";
+    protected const string BooleanKey4 = "startEndBlocks";
     protected const string StringKey = "annotationType";
+
 
     // Global Hashtables with default values
     private Hashtable defaultProperties = new Hashtable
     {
         { BooleanKey, false },
         { BooleanKey1, false },
+        { BooleanKey2, false },
+        { BooleanKey3, true },
+        { BooleanKey4, true },
         { StringKey, "generalCorrection" }
     };
 
@@ -91,6 +98,63 @@ public class BooleanSync : MonoBehaviourPunCallbacks
             return (string)annotationType;
         }
         return (string)defaultProperties[StringKey];
+    }
+
+    public void setDeletion(bool value)
+    {
+        defaultProperties[BooleanKey2] = value;
+        if (PhotonNetwork.CurrentRoom != null)
+        {
+            PhotonNetwork.CurrentRoom.SetCustomProperties(defaultProperties);
+        }
+    }
+
+    public bool returnDeletion()
+    {
+        if (PhotonNetwork.CurrentRoom != null &&
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(BooleanKey2, out var value))
+        {
+            return (bool)value;
+        }
+        return (bool)defaultProperties[BooleanKey2];
+    }
+
+    public void setArrows(bool value)
+    {
+        defaultProperties[BooleanKey3] = value;
+        if (PhotonNetwork.CurrentRoom != null)
+        {
+            PhotonNetwork.CurrentRoom.SetCustomProperties(defaultProperties);
+        }
+    }
+
+    public bool returnArrows()
+    {
+        if (PhotonNetwork.CurrentRoom != null &&
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(BooleanKey3, out var value))
+        {
+            return (bool)value;
+        }
+        return (bool)defaultProperties[BooleanKey3];
+    }
+
+    public void setStartEndBlock(bool value)
+    {
+        defaultProperties[BooleanKey4] = value;
+        if (PhotonNetwork.CurrentRoom != null)
+        {
+            PhotonNetwork.CurrentRoom.SetCustomProperties(defaultProperties);
+        }
+    }
+
+    public bool returnStartEndBlock()
+    {
+        if (PhotonNetwork.CurrentRoom != null &&
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(BooleanKey4, out var value))
+        {
+            return (bool)value;
+        }
+        return (bool)defaultProperties[BooleanKey4];
     }
 
 }
