@@ -33,10 +33,10 @@ public class BooleanSync : MonoBehaviourPunCallbacks
         defaultProperties[BooleanKey] = value;
         if (PhotonNetwork.CurrentRoom != null)
         {
-            Debug.Log("bool value being sent to isDrawing: " + value);
-            Debug.Log("test21");
+            //Debug.Log("bool value being sent to isDrawing: " + value);
+            //Debug.Log("test21");
             PhotonNetwork.CurrentRoom.SetCustomProperties(defaultProperties);
-            Debug.Log("Accesing directly fromd defaultProperties: " + defaultProperties[BooleanKey]);
+            //Debug.Log("Accesing directly fromd defaultProperties: " + defaultProperties[BooleanKey]);
         }
     }
 
@@ -47,8 +47,8 @@ public class BooleanSync : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom != null &&
             PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(BooleanKey, out var value))
         {
-            Debug.Log("Accesing directly fromd defaultPropertie1s: " + defaultProperties[BooleanKey]);
-            Debug.Log("error check here: " + (bool)value);
+            //Debug.Log("Accesing directly fromd defaultPropertie1s: " + defaultProperties[BooleanKey]);
+            //Debug.Log("error check here: " + (bool)value);
             return (bool)value;
         }
         return (bool)defaultProperties[BooleanKey];

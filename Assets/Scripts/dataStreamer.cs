@@ -74,7 +74,8 @@ public class dataStreamer : MonoBehaviour
         if (FindObjectOfType<BooleanSync>() != null)
         {
             booleanSync = FindObjectOfType<BooleanSync>();
-            CheckBoolRoutine();
+            StartCoroutine(CheckNetworkConnectionCoroutine());
+
         }
         else
         {
@@ -102,11 +103,11 @@ public class dataStreamer : MonoBehaviour
             yield return null;
         }
     }
-
     private IEnumerator CheckPositionChanges()
     {
         while (true)
         {
+            Debug.Log("Tracking annotation tracker positional changes");
             if (annotationTracker.position != lastPosition)
             {
                 Debug.Log("Position changed!");
@@ -125,36 +126,53 @@ public class dataStreamer : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
-
+    
     private IEnumerator CheckBoolRoutine()
     {
-        // Continuously check the boolean
-        while (!booleanSync.returnIsDrawing())
-        {
+
+        while (!booleanSync.returnIsDrawing()) 
+        { 
+                
             Debug.Log("still stuck");
             yield return null; // Wait for the next frame
+                
         }
-        Debug.Log("Annotation streaming commencing");
-        ProcessQueueContinuously();
-        CheckPositionChanges();
-    }
-
-    private IEnumerator InstantiateCoroutine(Vector3 newPosition)
-    {
+        yield return new WaitForSeconds(0.1f);
+        // Continuously check the boolean
         GameObject temp1 = Instantiate(lineRend);
         lineRenderer1 = temp1.GetComponent<LineRenderer>();
         temp1.transform.SetParent(parentHolderLineRenderer.transform);
+        Debug.Log("Annotation streaming commencing");
+        StartCoroutine(ProcessQueueContinuously());
+        StartCoroutine(CheckPositionChanges());
+    }
+
+    private IEnumerator CheckNetworkConnectionCoroutine()
+    {
+        Debug.Log("halo");
+        Debug.Log("isConnected: " + booleanSync.returnIsConnected());
+
+        // Wait until the network connection is established
+        while (!booleanSync.returnIsConnected())
+        {
+            Debug.Log("Stuck in network connection");
+            yield return new WaitForSeconds(0.25f); // Check every 0.5 seconds
+        }
+
+        Debug.Log("Network connected!");
+        StartCoroutine(CheckBoolRoutine());
+    }
+    private IEnumerator InstantiateCoroutine(Vector3 newPosition)
+    {
         if (lineRenderer1 == null)
         {
             string parentName = lineRenderer1.transform.parent.name;
             Debug.LogError("lineRenderer1 is not set! Make sure it is initialized before calling InstantiateCoroutine.");
             yield break;  // Stop the coroutine if lineRenderer1 is null
         }
-        else
-        {
-            string parentName = lineRenderer1.transform.parent.name;
-        }
 
+        lineRenderer1.startWidth = 0.002f;
+        lineRenderer1.endWidth = 0.002f;
         //shouldnt be needed for data streaming
         //Reset the frame count, so that the code only runs every 20 frames during gameplay
         int frameCount = 0;
@@ -256,7 +274,7 @@ public class dataStreamer : MonoBehaviour
             endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
         }
         startBlockBool = true;
-        CheckBoolRoutine();
+        StartCoroutine(CheckBoolRoutine());
     }
 
     public void setupAnnotationTracker(Transform transform)
