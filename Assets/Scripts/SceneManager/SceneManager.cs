@@ -10,7 +10,7 @@ public class SceneManager : MonoBehaviour
     {
         IMixedRealitySceneSystem sceneSystem = MixedRealityToolkit.Instance.GetService<IMixedRealitySceneSystem>();
         //load startup as single scene
-        await sceneSystem.LoadContent("testingSurgeon", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        await sceneSystem.LoadContent("modeSelectionScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
     public async void LoadSceneSingle(string sceneName)

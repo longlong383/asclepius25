@@ -5,8 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SceneManager.unity
+    guid: 72652d3433c1121459382b5359175581
   - enabled: 0
-    path: Assets/Scenes/ManagerScene.unity
+    path: 
     guid: e49913f9b04bbe84e914338398f476ab
   - enabled: 0
     path: 
@@ -38,6 +41,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CommunicationWorkingCopies/testingSurgeon.unity
     guid: 467b3e3e2e022b74dbcbd90e1a0e7dea
+  - enabled: 1
+    path: Assets/Scenes/modeSelectionScene.unity
+    guid: 00887c84cb649d14e83d5e8e5be7c099
+  - enabled: 1
+    path: Assets/Scenes/CommunicationWorkingCopies/testingTraineeScene 2.unity
+    guid: ee0c475689dfbcc478e44a0e0f661d1a
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: a9b2142c24aad574eb8f369b110105ca,
       type: 2}
