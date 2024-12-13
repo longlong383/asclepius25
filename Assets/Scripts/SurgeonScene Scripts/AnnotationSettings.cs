@@ -16,10 +16,11 @@ public class AnnotationSettings : MonoBehaviour
     {
         toggleVertice.OnClick.AddListener(() => showVertices(toggleVertice.IsToggled));
         toggleStartEnd.OnClick.AddListener(() => showStartEnd(toggleStartEnd.IsToggled));
-        destroyer.OnClick.AddListener(() => deleteAllAnnotations());
+        destroyer.OnClick.AddListener(() => deleteAllAnnotations(destroyer.IsToggled));
         toggleVertice.IsToggled = true;
         toggleStartEnd.IsToggled = true;
         destroyer.IsToggled = true;
+
         if(FindObjectsOfType<BooleanSync>() != null)
         {
             booleanSync = FindObjectOfType<BooleanSync>();
@@ -47,13 +48,13 @@ public class AnnotationSettings : MonoBehaviour
         }
     }
 
-    void deleteAllAnnotations()
+    void deleteAllAnnotations(bool placeHolder)
     {
         if (FindObjectOfType<AnnotationController>() != null && booleanSync.returnIsConnected() == true)
         {
             AnnotationController annotationController = FindObjectOfType<AnnotationController>();
             annotationController.callDestroyEverything();
-            booleanSync.setDeletion(true);
+            booleanSync.setDeletion(placeHolder);
         }
     }
 

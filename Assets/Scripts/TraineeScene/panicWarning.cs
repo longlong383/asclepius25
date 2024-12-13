@@ -12,14 +12,19 @@ public class panicWarning : MonoBehaviour
 
     private float duration = 3f; // Total duration in seconds
 
-    public Interactable interactable0, interactable1;
+    private BooleanSync booleanSync;
 
     private void Start()
     {
-        interactable0.OnClick.AddListener(warning);
-        interactable1.OnClick.AddListener(annotation);
+        if (FindObjectOfType<BooleanSync>() && FindObjectOfType<panicWarning>())
+        {
+            booleanSync = FindObjectOfType<BooleanSync>();
+        }
+        else
+        {
+            Debug.Log("Cannot find BooleanSync in " + this.gameObject.name);
+        }
     }
-
     public void warning()
     {
         StartCoroutine(ToggleObjectAndAudioWarning());
@@ -40,6 +45,8 @@ public class panicWarning : MonoBehaviour
             audioSourceWarning.Play();
             yield return new WaitForSeconds(0.2f);
         }
+        booleanSync.setAlertEmergency(false);
+        yield return null;
     }
 
     private IEnumerator ToggleObjectAndAudioAnnotation()
@@ -54,5 +61,7 @@ public class panicWarning : MonoBehaviour
             annotationIncoming.Play();
             yield return new WaitForSeconds(0.4f);
         }
+        booleanSync.setAlertGeneral(false);
+        yield return null;
     }
 }

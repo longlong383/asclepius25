@@ -51,17 +51,18 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     public Transform torso;
 
-    [HideInInspector] public Transform annotationTracker;
+    [HideInInspector] private Transform annotationTracker;
 
     private BooleanSync booleanSync;
 
+    private bool drewAtLeastOneArrow;
     void Start()
     {
         //setting up variables
         annotationName = null;
         draw = false;
         startBlockBool = false;
-
+        drewAtLeastOneArrow = false;
         annotationTracker = null;
 
         //accessing speech handlder
@@ -205,7 +206,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         //int value used to mark when 40 frames have been achieved
         int frameCountBall = 0;
         referenceSphere.GetComponent<Renderer>().material = onMaterial;
-        Debug.Log("annotationtype: " + booleanSync.returnAnnotationType());
+        //Debug.Log("annotationtype: " + booleanSync.returnAnnotationType());
         while (draw)
         {
             // Reset the frame count
@@ -267,6 +268,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 newAnnotation.transform.SetParent(parentHolderBall.transform);
                 newAnnotation.transform.localScale = new Vector3(0.3f, 0.3f, 0.6f);
                 frameCountBall = 0;
+                drewAtLeastOneArrow = true;
             }
         }
     }
@@ -278,8 +280,15 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             return;
         }
 
+        //check to confirm that the index is within bounds
+        if (parentHolderLineRenderer.transform.childCount - 1 < 0)
+        {
+            Debug.LogError("End block method executed accidentally even though there are no line renderer components. Bug detected");
+        }
+
         //method used to access last linernedrer component in the linerendrerer dump
         Transform temp = parentHolderLineRenderer.transform.GetChild(parentHolderLineRenderer.transform.childCount -1);
+
         LineRenderer lastLine = temp.GetComponent<LineRenderer>();
 
         if (draw)
@@ -288,7 +297,17 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             Debug.Log("Stopping to draw");
             draw = false;
             //setting up the position, rotation of the end block
-            Transform lastChild = parentHolderBall.transform.GetChild(parentHolderBall.transform.childCount - 1);
+            Transform lastChild;
+            if (parentHolderBall.transform.childCount - 1 <= 0 && drewAtLeastOneArrow == false)
+            {
+                lastChild = null;
+            }
+            else
+            {
+
+                lastChild = parentHolderBall.transform.GetChild(parentHolderBall.transform.childCount - 1);
+            }
+ 
             GameObject endBlock = Instantiate(startEndBlock, annotationObject.transform.position, Quaternion.Euler(0f, 0f, 0f));
             endBlock.SetActive(true);
             endBlock.transform.SetParent(startEndHolder.transform);
@@ -296,11 +315,15 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             endBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.006f);
 
             //there are two scenarios for instantiating the last block
-            /* scenario one, the last block's position is the same as the last arrow prefab, so it replaces it
-                * scenario two, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
+            /*scenario one, for some odd reason, the user decided to dip their hand quickly in and out of the mesh, so the lindRend has no positions contained within the lineRenderer (i.e. no lines)
+             * scenario two, the last block's position is the same as the last arrow prefab, so it replaces it
+                * scenario three, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
                 */
-
-            if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount - 1))
+            if (lastLine.positionCount == 0)
+            {
+                endBlock.transform.position = lastLine.GetComponent<Transform>().position;
+            }
+            else if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount - 1) && drewAtLeastOneArrow == false)
             {
                 //scenario one
                 endBlock.transform.position = lastChild.transform.position;
@@ -310,8 +333,13 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             else
             {
                 //scenario two
-                //getting the vector based off the points of the previous two line renderers
-                Vector3 direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
+                //Vector3 direction;
+                ////getting the vector based off the points of the previous two line renderers
+                //if (lastLine.positionCount - 2  < 0)
+                //{
+                //    direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
+                //}
+                //direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
 
                 endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
             }
@@ -322,6 +350,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
                 booleanSync.setIsDrawing(false);
             }
+            drewAtLeastOneArrow = false;
             StopAllCoroutines();
         }
     }

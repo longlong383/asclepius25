@@ -11,6 +11,8 @@ public class BooleanSync : MonoBehaviourPunCallbacks
     protected const string BooleanKey2 = "deletion";
     protected const string BooleanKey3 = "arrows";
     protected const string BooleanKey4 = "startEndBlocks";
+    protected const string BooleanKey5 = "alertEmergency";
+    protected const string BooleanKey6 = "alertGeneral";
     protected const string StringKey = "annotationType";
 
 
@@ -22,7 +24,9 @@ public class BooleanSync : MonoBehaviourPunCallbacks
         { BooleanKey2, false },
         { BooleanKey3, true },
         { BooleanKey4, true },
-        { StringKey, "generalCorrection" }
+        { BooleanKey5, false },
+        { BooleanKey6, false },
+        { StringKey, "generalcorrection" }
     };
 
     public void setupEverything()
@@ -40,10 +44,7 @@ public class BooleanSync : MonoBehaviourPunCallbacks
         defaultProperties[BooleanKey] = value;
         if (PhotonNetwork.CurrentRoom != null)
         {
-            //Debug.Log("bool value being sent to isDrawing: " + value);
-            //Debug.Log("test21");
             PhotonNetwork.CurrentRoom.SetCustomProperties(defaultProperties);
-            //Debug.Log("Accesing directly fromd defaultProperties: " + defaultProperties[BooleanKey]);
         }
     }
 
@@ -54,8 +55,6 @@ public class BooleanSync : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom != null &&
             PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(BooleanKey, out var value))
         {
-            //Debug.Log("Accesing directly fromd defaultPropertie1s: " + defaultProperties[BooleanKey]);
-            //Debug.Log("error check here: " + (bool)value);
             return (bool)value;
         }
         return (bool)defaultProperties[BooleanKey];
@@ -102,6 +101,7 @@ public class BooleanSync : MonoBehaviourPunCallbacks
 
     public void setDeletion(bool value)
     {
+        //Debug.Log("Why is this activating");
         defaultProperties[BooleanKey2] = value;
         if (PhotonNetwork.CurrentRoom != null)
         {
@@ -155,6 +155,44 @@ public class BooleanSync : MonoBehaviourPunCallbacks
             return (bool)value;
         }
         return (bool)defaultProperties[BooleanKey4];
+    }
+
+    public void setAlertEmergency(bool value)
+    {
+        defaultProperties[BooleanKey5] = value;
+        if (PhotonNetwork.CurrentRoom != null)
+        {
+            PhotonNetwork.CurrentRoom.SetCustomProperties(defaultProperties);
+        }
+    }
+
+    public bool returnAlertEmergency()
+    {
+        if (PhotonNetwork.CurrentRoom != null &&
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(BooleanKey5, out var value))
+        {
+            return (bool)value;
+        }
+        return (bool)defaultProperties[BooleanKey5];
+    }
+
+    public void setAlertGeneral(bool value)
+    {
+        defaultProperties[BooleanKey6] = value;
+        if (PhotonNetwork.CurrentRoom != null)
+        {
+            PhotonNetwork.CurrentRoom.SetCustomProperties(defaultProperties);
+        }
+    }
+
+    public bool returnAlertGeneral()
+    {
+        if (PhotonNetwork.CurrentRoom != null &&
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(BooleanKey6, out var value))
+        {
+            return (bool)value;
+        }
+        return (bool)defaultProperties[BooleanKey6];
     }
 
 }

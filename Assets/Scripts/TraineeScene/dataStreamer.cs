@@ -65,9 +65,12 @@ public class dataStreamer : MonoBehaviour
 
     private Vector3 lastPosition;
 
+    private bool drewAtLeastOneArrow;
+
     void Start()
     {
         //setting default values for some variables
+        drewAtLeastOneArrow = false;
         startBlockBool = true;
         arrowCount = 0;
         lineRenderer1 = null;
@@ -131,11 +134,8 @@ public class dataStreamer : MonoBehaviour
     {
 
         while (!booleanSync.returnIsDrawing()) 
-        { 
-                
-            Debug.Log("still stuck");
+        {
             yield return null; // Wait for the next frame
-                
         }
         yield return new WaitForSeconds(0.3f);
 
@@ -144,8 +144,9 @@ public class dataStreamer : MonoBehaviour
         lineRenderer1 = temp1.GetComponent<LineRenderer>();
         temp1.transform.SetParent(parentHolderLineRenderer.transform);
 
+        string temp = booleanSync.returnAnnotationType().ToLower();
         //setting up annotation material
-        switch (booleanSync.returnAnnotationType())
+        switch (temp)
         {
             //output annotation type
             /*
@@ -211,7 +212,6 @@ public class dataStreamer : MonoBehaviour
     {
         if (lineRenderer1 == null)
         {
-            string parentName = lineRenderer1.transform.parent.name;
             Debug.LogError("lineRenderer1 is not set! Make sure it is initialized before calling InstantiateCoroutine.");
             yield break;  // Stop the coroutine if lineRenderer1 is null
         }
@@ -277,6 +277,7 @@ public class dataStreamer : MonoBehaviour
             newAnnotation.transform.SetParent(parentHolderBall.transform);
             newAnnotation.transform.localScale = new Vector3(0.3f, 0.3f, 0.6f);
             arrowCount = 0;
+            drewAtLeastOneArrow = true;
         }
         
         
@@ -284,6 +285,18 @@ public class dataStreamer : MonoBehaviour
 
     private void endBlock()
     {
+        //check to confirm that the index is within bounds
+        if (parentHolderLineRenderer.transform.childCount - 1 < 0)
+        {
+            Debug.LogError("End block method executed accidentally even though there are no line renderer components. Bug detected");
+        }
+
+        //check to confirm that the index is within bounds
+        if (parentHolderLineRenderer.transform.childCount - 1 < 0)
+        {
+            Debug.LogError("End block method executed accidentally even though there are no line renderer components. Bug detected");
+        }
+
         //method used to access last linernedrer component in the linerendrerer dump
         Transform temp = parentHolderLineRenderer.transform.GetChild(parentHolderLineRenderer.transform.childCount - 1);
         LineRenderer lastLine = temp.GetComponent<LineRenderer>();
@@ -291,7 +304,15 @@ public class dataStreamer : MonoBehaviour
         Debug1.text += "\nStopping to draw";
         Debug.Log("Stopping to draw");
         //setting up the position, rotation of the end block
-        Transform lastChild = parentHolderBall.transform.GetChild(parentHolderBall.transform.childCount - 1);
+        Transform lastChild;
+        if (parentHolderBall.transform.childCount - 1 <= 0 && drewAtLeastOneArrow == false)
+        {
+            lastChild = null;
+        }
+        else
+        {
+            lastChild = parentHolderBall.transform.GetChild(parentHolderBall.transform.childCount - 1);
+        }
         GameObject endBlock = Instantiate(startEndBlock, annotationObject.transform.position, Quaternion.Euler(0f, 0f, 0f));
         endBlock.SetActive(true);
         endBlock.transform.SetParent(startEndHolder.transform);
@@ -303,7 +324,11 @@ public class dataStreamer : MonoBehaviour
         * scenario two, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
         */
 
-        if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount - 1))
+        if (lastLine.positionCount == 0)
+        {
+            endBlock.transform.position = lastLine.GetComponent<Transform>().position;
+        }
+        else if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount - 1) && drewAtLeastOneArrow == false)
         {
             //scenario one
             endBlock.transform.position = lastChild.transform.position;
@@ -314,12 +339,13 @@ public class dataStreamer : MonoBehaviour
         {
             //scenario two
             //getting the vector based off the points of the previous two line renderers
-            Vector3 direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
+            //Vector3 direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
 
             endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
         }
         arrowCount = 0;
         startBlockBool = true;
+        drewAtLeastOneArrow = false;
         StartCoroutine(CheckBoolRoutine());
     }
 

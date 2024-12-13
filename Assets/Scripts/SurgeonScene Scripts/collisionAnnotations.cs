@@ -19,13 +19,15 @@ public class collisionAnnotations : MonoBehaviour
         }
     }
     // Called when another collider exits the trigger
-    private void OnTriggerExit(Collider other)
+    private IEnumerator OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Phantom") && checkConnection() == true)
         {
             Debug.Log("Object exited the trigger: " + other.name);
+            yield return new WaitForSeconds(0.05f);
             annotationController.StopDrawing();
         }
+        yield return null;
     }
 
     private bool checkConnection()
