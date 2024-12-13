@@ -2,6 +2,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 using System.Collections;
 using UnityEngine;
 
+
 public class panicWarning : MonoBehaviour
 {
     public GameObject targetObject; // Assign your object in the Inspector
@@ -25,16 +26,16 @@ public class panicWarning : MonoBehaviour
             Debug.Log("Cannot find BooleanSync in " + this.gameObject.name);
         }
     }
-    public void warning()
-    {
-        StartCoroutine(ToggleObjectAndAudioWarning());
-    }
-    public void annotation()
-    {
-        StartCoroutine(ToggleObjectAndAudioAnnotation());
-    }
+    //public void warning()
+    //{
+    //    StartCoroutine(ToggleObjectAndAudioWarning());
+    //}
+    //public void annotation()
+    //{
+    //    StartCoroutine(ToggleObjectAndAudioAnnotation());
+    //}
 
-    private IEnumerator ToggleObjectAndAudioWarning()
+    public IEnumerator ToggleObjectAndAudioWarning()
     {
         targetObject.GetComponent<Renderer>().material = warningMaterial;
         for (int i = 0; i < toggleCount * 2; i++)
@@ -45,11 +46,10 @@ public class panicWarning : MonoBehaviour
             audioSourceWarning.Play();
             yield return new WaitForSeconds(0.2f);
         }
-        booleanSync.setAlertEmergency(false);
-        yield return null;
+        yield break;
     }
 
-    private IEnumerator ToggleObjectAndAudioAnnotation()
+    public IEnumerator ToggleObjectAndAudioGeneral()
     {
         float interval = duration / (toggleCount * 2);
         targetObject.GetComponent<Renderer>().material = annotationMaterial;
@@ -61,7 +61,6 @@ public class panicWarning : MonoBehaviour
             annotationIncoming.Play();
             yield return new WaitForSeconds(0.4f);
         }
-        booleanSync.setAlertGeneral(false);
-        yield return null;
+        yield break;
     }
 }

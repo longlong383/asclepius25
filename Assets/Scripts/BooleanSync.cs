@@ -21,11 +21,11 @@ public class BooleanSync : MonoBehaviourPunCallbacks
     {
         { BooleanKey, false },
         { BooleanKey1, false },
-        { BooleanKey2, false },
+        { BooleanKey2, true },
         { BooleanKey3, true },
         { BooleanKey4, true },
-        { BooleanKey5, false },
-        { BooleanKey6, false },
+        { BooleanKey5, true },
+        { BooleanKey6, true },
         { StringKey, "generalcorrection" }
     };
 

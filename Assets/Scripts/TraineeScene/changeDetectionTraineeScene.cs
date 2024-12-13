@@ -9,9 +9,9 @@ public class changeDetectionTraineeScene : MonoBehaviour
     private BooleanSync booleanSync;
     private panicWarning panicWarning;
     protected bool arrows, startEndBlock;
-    protected bool deletion = false;
-    protected bool emergency = false;
-    protected bool general = false;
+    protected bool deletion;
+    protected bool emergency;
+    protected bool general;
 
     [SerializeField] private GameObject parentHolderBall;
     [SerializeField] private GameObject parentHolderLineRenderer;
@@ -33,57 +33,59 @@ public class changeDetectionTraineeScene : MonoBehaviour
 
     private IEnumerator boolMonitoring()
     {
+        //yield return new WaitForSeconds(2f);
         while (true)
         {
             if (booleanSync.returnDeletion() != deletion)
             {
+                Debug.Log("deletion boolsync: " + booleanSync.returnDeletion());
                 //Debug.Log("alert bool before: " + booleanSync.returnAlertEmergency());
                 //Debug.Log("alert general before: " + booleanSync.returnAlertGeneral());
-                Debug.Log("returnDeletion before : " + booleanSync.returnDeletion());
-                //destroyEverything();
+                Debug.Log("returnDeletion before : " + deletion);
+                destroyEverything();
                 deletion = booleanSync.returnDeletion();
-                //yield return new WaitForSeconds(0.1f);
-                Debug.Log("returnDeletion before : " + booleanSync.returnDeletion());
+                Debug.Log("returnDeletion before : " + deletion);
             }
             if (booleanSync.returnArrows() != arrows)
             {
+                Debug.Log("arrows boolsync: " + booleanSync.returnArrows());
                 Debug.Log("Arrows before: " + arrows);
-                //parentHolderBall.SetActive(booleanSync.returnArrows());
+                parentHolderBall.SetActive(booleanSync.returnArrows());
                 arrows = booleanSync.returnArrows();
-                //yield return new WaitForSeconds(0.1f);
                 Debug.Log("Arrows after " + arrows);
             }
 
             if (booleanSync.returnStartEndBlock() != startEndBlock)
             {
+                Debug.Log("start end boolsync: " + booleanSync.returnStartEndBlock());
                 Debug.Log("Startend before: " +  startEndBlock);
-                //startEndHolder.SetActive(booleanSync.returnStartEndBlock());
+                startEndHolder.SetActive(booleanSync.returnStartEndBlock());
                 startEndBlock = booleanSync.returnStartEndBlock();
-                //yield return new WaitForSeconds(0.1f);
                 Debug.Log("Startend after: " + startEndBlock);
             }
 
             if (booleanSync.returnAlertEmergency() != emergency)
             {
-                Debug.Log("alert bool before: " + booleanSync.returnAlertEmergency());
-                //panicWarning.warning();
+                Debug.Log("alert emerge boolsync: " + booleanSync.returnAlertEmergency());
+                Debug.Log("alert bool before: " + emergency);
                 emergency = booleanSync.returnAlertEmergency();
-                //yield return new WaitForSeconds(0.1f);
-                Debug.Log("alert bool after: " + booleanSync.returnAlertEmergency());
-            }
+                yield return panicWarning.StartCoroutine(panicWarning.ToggleObjectAndAudioWarning());
+                Debug.Log("alert bool after: " + emergency);
+                continue;
+            } 
 
             if (booleanSync.returnAlertGeneral() != general)
             {
-                Debug.Log("alert general before: " + booleanSync.returnAlertGeneral());
-                //panicWarning.annotation();
+                Debug.Log("alert boolsync: " + booleanSync.returnAlertGeneral());
+                Debug.Log("alert general before: " + emergency);
                 general = booleanSync.returnAlertGeneral();
-                //yield return new WaitForSeconds(0.1f);
-                Debug.Log("alert general before: " + booleanSync.returnAlertGeneral());
+                yield return panicWarning.StartCoroutine(panicWarning.ToggleObjectAndAudioGeneral());
+                Debug.Log("alert general before: " + emergency);
             }
-
-            yield return new WaitForSeconds(0.5f);
-            //yield return null;
+            yield return null;
+            //yield return new WaitForSeconds(3f);
         }
+
     }
 
     private void destroyEverything()
@@ -109,12 +111,12 @@ public class changeDetectionTraineeScene : MonoBehaviour
         {
             yield return new WaitForSeconds(0.25f); // Check every 0.5 seconds
         }
-        arrows = !booleanSync.returnArrows();
-        startEndBlock = !booleanSync.returnStartEndBlock();
-        general = !booleanSync.returnAlertGeneral();
-        emergency = !booleanSync.returnAlertEmergency();
-        deletion = !booleanSync.returnDeletion();
+        arrows = booleanSync.returnArrows();
+        startEndBlock = booleanSync.returnStartEndBlock();
+        general = booleanSync.returnAlertGeneral();
+        emergency = booleanSync.returnAlertEmergency();
+        deletion = booleanSync.returnDeletion();
+        //yield return new WaitForSeconds(2f); 
         StartCoroutine(boolMonitoring());
-        yield return null;
     }
 }

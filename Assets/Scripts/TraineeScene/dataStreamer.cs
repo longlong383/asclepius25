@@ -126,7 +126,7 @@ public class dataStreamer : MonoBehaviour
                 break;
             }
             // Check position every 0.1 seconds
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
     

@@ -30,6 +30,7 @@ public class AnnotationSettings : MonoBehaviour
     // Update is called once per frame
     void showVertices(bool placeHolder)
     {
+        Debug.Log(placeHolder);
         verticeHolder.SetActive(placeHolder);
         if (booleanSync.returnIsConnected() == true)
         {
@@ -40,6 +41,7 @@ public class AnnotationSettings : MonoBehaviour
 
     void showStartEnd(bool placeHolder)
     {
+        Debug.Log(placeHolder);
         startEndHolder.SetActive(placeHolder);
         if (booleanSync.returnIsConnected() == true)
         {
@@ -50,6 +52,7 @@ public class AnnotationSettings : MonoBehaviour
 
     void deleteAllAnnotations(bool placeHolder)
     {
+        Debug.Log(placeHolder);
         if (FindObjectOfType<AnnotationController>() != null && booleanSync.returnIsConnected() == true)
         {
             AnnotationController annotationController = FindObjectOfType<AnnotationController>();
