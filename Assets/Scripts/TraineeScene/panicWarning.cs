@@ -26,6 +26,7 @@ public class panicWarning : MonoBehaviour
             Debug.Log("Cannot find BooleanSync in " + this.gameObject.name);
         }
     }
+
     //public void warning()
     //{
     //    StartCoroutine(ToggleObjectAndAudioWarning());

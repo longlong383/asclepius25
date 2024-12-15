@@ -67,11 +67,13 @@ public class dataStreamer : MonoBehaviour
 
     private bool drewAtLeastOneArrow;
 
+    private Transform transformationChanges;
+
     void Start()
     {
         //setting default values for some variables
         drewAtLeastOneArrow = false;
-        startBlockBool = true;
+        startBlockBool = false;
         arrowCount = 0;
         lineRenderer1 = null;
         if (FindObjectOfType<BooleanSync>() != null)
@@ -137,7 +139,6 @@ public class dataStreamer : MonoBehaviour
         {
             yield return null; // Wait for the next frame
         }
-        yield return new WaitForSeconds(0.3f);
 
         // setting up the line renderer
         GameObject temp1 = Instantiate(lineRend);
@@ -186,7 +187,7 @@ public class dataStreamer : MonoBehaviour
                 Debug.LogError("An error has occured");
                 break;
         }
-
+        startBlockBool = true;
         // starting annotation systems
         Debug.Log("Annotation streaming commencing");
         StartCoroutine(ProcessQueueContinuously());
@@ -344,7 +345,7 @@ public class dataStreamer : MonoBehaviour
             endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
         }
         arrowCount = 0;
-        startBlockBool = true;
+        //startBlockBool = true;
         drewAtLeastOneArrow = false;
         StartCoroutine(CheckBoolRoutine());
     }
@@ -354,6 +355,11 @@ public class dataStreamer : MonoBehaviour
         annotationTracker = transform;
 
         lastPosition = transform.position;
+    }
+
+    public void setupTransformationChange(Transform transform)
+    {
+        transformationChanges = transform;
     }
 
 }
