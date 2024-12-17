@@ -60,7 +60,7 @@ public class dataStreamer : MonoBehaviour
 
     private Queue<Func<IEnumerator>> transformTransport = new Queue<Func<IEnumerator>>();
 
-
+    //bool used to control the 
     private bool isProcessing;
 
     private Vector3 lastPosition;
@@ -89,6 +89,7 @@ public class dataStreamer : MonoBehaviour
         isProcessing = false;   
     }
 
+    //continously process the queue
     private IEnumerator ProcessQueueContinuously()
     {
         while (true) // Run indefinitely
@@ -108,6 +109,8 @@ public class dataStreamer : MonoBehaviour
             yield return null;
         }
     }
+
+    //check to see if there are any position changes with the annotation tracker. If so, take that position, and add it to the queue
     private IEnumerator CheckPositionChanges()
     {
         while (true)
@@ -132,9 +135,10 @@ public class dataStreamer : MonoBehaviour
         }
     }
     
+    //method continously checks to see if an annotation is starting to be drawn by the surgeon
     private IEnumerator CheckBoolRoutine()
     {
-
+        //continously checks until the bool has been changed to signify that annotations should start drawing
         while (!booleanSync.returnIsDrawing()) 
         {
             yield return null; // Wait for the next frame
@@ -194,21 +198,23 @@ public class dataStreamer : MonoBehaviour
         StartCoroutine(CheckPositionChanges());
     }
 
+    //continously checks to see if a connection has been made with the photon network
     private IEnumerator CheckNetworkConnectionCoroutine()
     {
-        Debug.Log("halo");
-        Debug.Log("isConnected: " + booleanSync.returnIsConnected());
+        //Debug.Log("isConnected: " + booleanSync.returnIsConnected());
 
         // Wait until the network connection is established
         while (!booleanSync.returnIsConnected())
         {
-            Debug.Log("Stuck in network connection");
+            Debug.Log("Connecting to network");
             yield return new WaitForSeconds(0.25f); // Check every 0.5 seconds
         }
 
         Debug.Log("Network connected!");
         StartCoroutine(CheckBoolRoutine());
     }
+
+
     private IEnumerator InstantiateCoroutine(Vector3 newPosition)
     {
         if (lineRenderer1 == null)
@@ -320,27 +326,27 @@ public class dataStreamer : MonoBehaviour
         endBlock.GetComponent<Renderer>().material = endMaterial;
         endBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.006f);
 
-        //there are two scenarios for instantiating the last block
-        /* scenario one, the last block's position is the same as the last arrow prefab, so it replaces it
-        * scenario two, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
-        */
+        //there are three scenarios for instantiating the last block
+        /* scenario one, for some odd reason, the user decided to dip their hand quickly in and out of the mesh, so the lindRend has no positions contained within the lineRenderer (i.e. no lines)
+         * scenario two, the last block's position is the same as the last arrow prefab, so it replaces it
+         * scenario three, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
+         */
 
         if (lastLine.positionCount == 0)
         {
+            //scenario 1
             endBlock.transform.position = lastLine.GetComponent<Transform>().position;
         }
         else if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount - 1) && drewAtLeastOneArrow == false)
         {
-            //scenario one
+            //scenario 2
             endBlock.transform.position = lastChild.transform.position;
             endBlock.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             Destroy(lastChild.gameObject);
         }
         else
         {
-            //scenario two
-            //getting the vector based off the points of the previous two line renderers
-            //Vector3 direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
+            //scenario three
 
             endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
         }
@@ -350,6 +356,7 @@ public class dataStreamer : MonoBehaviour
         StartCoroutine(CheckBoolRoutine());
     }
 
+    //function called to assign the annotation tracker once a network connection has been made
     public void setupAnnotationTracker(Transform transform)
     {
         annotationTracker = transform;
@@ -357,6 +364,7 @@ public class dataStreamer : MonoBehaviour
         lastPosition = transform.position;
     }
 
+    //function to call the transformational change needed to be applied to annotations to account for positonal, rotational and scale changes
     public void setupTransformationChange(Transform transform)
     {
         transformationChanges = transform;

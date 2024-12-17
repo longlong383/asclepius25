@@ -27,7 +27,7 @@ public class AnnotationSettings : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    //makes arrows along annotation appear/disappear
     void showVertices(bool placeHolder)
     {
         Debug.Log(placeHolder);
@@ -35,10 +35,12 @@ public class AnnotationSettings : MonoBehaviour
         if (booleanSync.returnIsConnected() == true)
         {
             Debug.Log(placeHolder);
+            //sets bool value on photon network
             booleanSync.setArrows(placeHolder);
         }
     }
 
+    //makes start/end cubes appear/disappear
     void showStartEnd(bool placeHolder)
     {
         Debug.Log(placeHolder);
@@ -46,10 +48,12 @@ public class AnnotationSettings : MonoBehaviour
         if (booleanSync.returnIsConnected() == true)
         {
             Debug.Log(placeHolder);
+            //sets bool value on photon network
             booleanSync.setStartEndBlock(placeHolder);
         }
     }
 
+    //deletes all annotations in scene
     void deleteAllAnnotations(bool placeHolder)
     {
         Debug.Log(placeHolder);
@@ -57,6 +61,7 @@ public class AnnotationSettings : MonoBehaviour
         {
             AnnotationController annotationController = FindObjectOfType<AnnotationController>();
             annotationController.callDestroyEverything();
+            //sets deletion bool value on script
             booleanSync.setDeletion(placeHolder);
         }
     }

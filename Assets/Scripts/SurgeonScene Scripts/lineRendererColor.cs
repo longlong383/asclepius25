@@ -53,6 +53,7 @@ public class lineRendererColor : MonoBehaviour
         {
             annotationController.lineRend.GetComponent<LineRenderer>().material = lineMaterial;
             annotationController.annotationName = annotationType;
+            //updating the annotation type identifier to the photon network
             booleanSync.setAnnotationType(annotationType);
         }
         else

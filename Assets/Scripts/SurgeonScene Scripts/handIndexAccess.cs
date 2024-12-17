@@ -13,6 +13,7 @@ public class handIndexAccess : MonoBehaviour
 
     void Update()
     {
+        //attaches annotation tracker to the index finger
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, handedness, out MixedRealityPose pose))
         {
             objectToAttach.transform.localPosition = pose.Position; // Optional: Adjust as needed

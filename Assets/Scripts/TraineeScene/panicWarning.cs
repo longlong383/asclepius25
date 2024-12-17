@@ -27,15 +27,7 @@ public class panicWarning : MonoBehaviour
         }
     }
 
-    //public void warning()
-    //{
-    //    StartCoroutine(ToggleObjectAndAudioWarning());
-    //}
-    //public void annotation()
-    //{
-    //    StartCoroutine(ToggleObjectAndAudioAnnotation());
-    //}
-
+    //emergency alert system activation upon command from changeDetection script
     public IEnumerator ToggleObjectAndAudioWarning()
     {
         targetObject.GetComponent<Renderer>().material = warningMaterial;
@@ -50,6 +42,7 @@ public class panicWarning : MonoBehaviour
         yield break;
     }
 
+    //general alert system activation upon command from changeDetection script
     public IEnumerator ToggleObjectAndAudioGeneral()
     {
         float interval = duration / (toggleCount * 2);

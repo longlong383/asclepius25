@@ -26,30 +26,28 @@ public class alertActivationSurgeon : MonoBehaviour
         general.IsToggled = true;
     }
 
+    //emergency alert method that updates bool on photon server
     private void emergencyActivation(bool placeHolder)
     {
-        Debug.Log("Emergency toggle initial state: " + emergency.IsToggled);
-
-        Debug.Log("alert bool before: " + booleanSync.returnAlertEmergency());
-        Debug.Log("placeHolder before: " + placeHolder);
+        //Debug.Log("Emergency toggle initial state: " + emergency.IsToggled);
+        //Debug.Log("alert bool before: " + booleanSync.returnAlertEmergency());
+        //Debug.Log("placeHolder before: " + placeHolder);
         booleanSync.setAlertEmergency(placeHolder);
-        Debug.Log("emergency signal sent successfully");
-        //yield return new WaitForSeconds(0.1f);
-        Debug.Log("placeHolder after: " + placeHolder);
-        Debug.Log("alert bool after: " + booleanSync.returnAlertEmergency());
+        //Debug.Log("emergency signal sent successfully");
+
+        //Debug.Log("placeHolder after: " + placeHolder);
+        //Debug.Log("alert bool after: " + booleanSync.returnAlertEmergency());
     }
 
     private void generalActiviation(bool placeHolder)
     {
-        Debug.Log("Emergency toggle initial state: " + general.IsToggled);
-
-        Debug.Log("general bool before: " + booleanSync.returnAlertGeneral());
-        Debug.Log("placeHolder before: " + placeHolder);
+        //Debug.Log("Emergency toggle initial state: " + general.IsToggled);
+        //Debug.Log("general bool before: " + booleanSync.returnAlertGeneral());
+        //Debug.Log("placeHolder before: " + placeHolder);
         booleanSync.setAlertGeneral(placeHolder);
-        Debug.Log("general signal sent successfully");
-        //yield return new WaitForSeconds(0.1f);
-        Debug.Log("placeHolder after: " + placeHolder);
-        Debug.Log("general bool after: " + booleanSync.returnAlertGeneral());
+        //Debug.Log("general signal sent successfully");
+        //Debug.Log("placeHolder after: " + placeHolder);
+        //Debug.Log("general bool after: " + booleanSync.returnAlertGeneral());
     }
 
 }

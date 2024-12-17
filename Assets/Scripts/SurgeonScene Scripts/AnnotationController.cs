@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Security.Authentication.ExtendedProtection;
 
 
 
@@ -80,11 +81,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         }
     }
 
-    //method is only used for debugging purposes, to be commented out during gameplay on hololens
-    //void Update()
-    //{
-    //}
-
+    //voice commands on receival from the MRTK Toolkit
     public void OnSpeechKeywordRecognized(SpeechEventData eventData)
     {
         if (checkConnection() == false)
@@ -173,7 +170,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         destroyEverything();
     }
 
-    //continuously running function for annotating
+    //continuously running function for annotations
     private IEnumerator InstantiateCoroutine()
     {
         if (FindObjectOfType<BooleanSync>() == null)
@@ -183,12 +180,15 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
         booleanSync = FindObjectOfType<BooleanSync>();
 
+        //if no connection to photon server is established, stops annotating immediately
         if (booleanSync.returnIsConnected() == false)
         {
             StopAllCoroutines();
         }
 
         Debug.Log("boolean status before: " + booleanSync.returnIsDrawing());
+
+        //set boolean as true to let trainee scene know to start tracking annotation tracker
         booleanSync.setIsDrawing(true);
         //mental note, it takes a bit of time for this bool to be sent to the network, hence the time delay is needed to provide
         //an actual reading of the boolean
@@ -314,33 +314,26 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             endBlock.GetComponent<Renderer>().material = endMaterial;
             endBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.006f);
 
-            //there are two scenarios for instantiating the last block
+            //there are three scenarios for instantiating the last block
             /*scenario one, for some odd reason, the user decided to dip their hand quickly in and out of the mesh, so the lindRend has no positions contained within the lineRenderer (i.e. no lines)
              * scenario two, the last block's position is the same as the last arrow prefab, so it replaces it
-                * scenario three, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
-                */
+             * scenario three, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
+             */
             if (lastLine.positionCount == 0)
             {
+                //scenario 1
                 endBlock.transform.position = lastLine.GetComponent<Transform>().position;
             }
             else if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount - 1) && drewAtLeastOneArrow == false)
             {
-                //scenario one
+                //scenario 2
                 endBlock.transform.position = lastChild.transform.position;
                 endBlock.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 Destroy(lastChild.gameObject);
             }
             else
             {
-                //scenario two
-                //Vector3 direction;
-                ////getting the vector based off the points of the previous two line renderers
-                //if (lastLine.positionCount - 2  < 0)
-                //{
-                //    direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
-                //}
-                //direction = lastLine.GetPosition(lastLine.positionCount - 1) - lastLine.GetPosition(lastLine.positionCount - 2);
-
+                //scenario 3
                 endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
             }
             referenceSphere.GetComponent<Renderer>().material = offMaterial;
@@ -410,12 +403,12 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     {
         Debug1.text += $"\n{placeHolder}";
     }
-
+    //function called to assign the annotation tracker once a network connection has been made
     public void setupAnnotationTracker(Transform transform)
     {
         annotationTracker = transform;
     }
-
+    //method to check if properly connected to photon network
     private bool checkConnection()
     {
         if (FindObjectOfType<BooleanSync>() != null)

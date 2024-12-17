@@ -31,21 +31,22 @@ public class changeDetectionTraineeScene : MonoBehaviour
         StartCoroutine(CheckNetworkConnectionCoroutine());
     }
 
+    //continously checks photon network to see if any values have been modified
     private IEnumerator boolMonitoring()
     {
-        //yield return new WaitForSeconds(2f);
         while (true)
         {
+            //check to see if there's a need to delete annotations
             if (booleanSync.returnDeletion() != deletion)
             {
                 Debug.Log("deletion boolsync: " + booleanSync.returnDeletion());
-                //Debug.Log("alert bool before: " + booleanSync.returnAlertEmergency());
-                //Debug.Log("alert general before: " + booleanSync.returnAlertGeneral());
                 Debug.Log("returnDeletion before : " + deletion);
                 destroyEverything();
                 deletion = booleanSync.returnDeletion();
                 Debug.Log("returnDeletion before : " + deletion);
             }
+
+            //check to see if surgeon wants to make arrows disappear/reappear
             if (booleanSync.returnArrows() != arrows)
             {
                 Debug.Log("arrows boolsync: " + booleanSync.returnArrows());
@@ -55,6 +56,7 @@ public class changeDetectionTraineeScene : MonoBehaviour
                 Debug.Log("Arrows after " + arrows);
             }
 
+            //make start/end cubes appear/disappear
             if (booleanSync.returnStartEndBlock() != startEndBlock)
             {
                 Debug.Log("start end boolsync: " + booleanSync.returnStartEndBlock());
@@ -64,6 +66,7 @@ public class changeDetectionTraineeScene : MonoBehaviour
                 Debug.Log("Startend after: " + startEndBlock);
             }
 
+            //emergency alert activation
             if (booleanSync.returnAlertEmergency() != emergency)
             {
                 Debug.Log("alert emerge boolsync: " + booleanSync.returnAlertEmergency());
@@ -74,6 +77,7 @@ public class changeDetectionTraineeScene : MonoBehaviour
                 continue;
             } 
 
+            //general alert activation
             if (booleanSync.returnAlertGeneral() != general)
             {
                 Debug.Log("alert boolsync: " + booleanSync.returnAlertGeneral());
@@ -83,11 +87,11 @@ public class changeDetectionTraineeScene : MonoBehaviour
                 Debug.Log("alert general before: " + emergency);
             }
             yield return null;
-            //yield return new WaitForSeconds(3f);
         }
 
     }
 
+    //destroys all annotations objects in scene
     private void destroyEverything()
     {
         foreach (Transform child in parentHolderBall.transform)
@@ -104,6 +108,7 @@ public class changeDetectionTraineeScene : MonoBehaviour
         }
     }
 
+    //method that continously checks to see if a network connection is made with photon network
     private IEnumerator CheckNetworkConnectionCoroutine()
     {
         // Wait until the network connection is established
@@ -111,12 +116,13 @@ public class changeDetectionTraineeScene : MonoBehaviour
         {
             yield return new WaitForSeconds(0.25f); // Check every 0.5 seconds
         }
+
+        //retrieving all bool values from the photon network
         arrows = booleanSync.returnArrows();
         startEndBlock = booleanSync.returnStartEndBlock();
         general = booleanSync.returnAlertGeneral();
         emergency = booleanSync.returnAlertEmergency();
         deletion = booleanSync.returnDeletion();
-        //yield return new WaitForSeconds(2f); 
         StartCoroutine(boolMonitoring());
     }
 }

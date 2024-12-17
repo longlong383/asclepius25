@@ -6,7 +6,7 @@ public class collisionAnnotations : MonoBehaviour
 {
     public AnnotationController annotationController;
 
-    // Called when another collider enters the trigger
+    // Called when annotation tracker collides with mesh of patient model
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("connection status: " + checkConnection());
@@ -18,7 +18,8 @@ public class collisionAnnotations : MonoBehaviour
             annotationController.StartDrawing();
         }
     }
-    // Called when another collider exits the trigger
+
+    // Called when annotation tracker exist the patient mesh model
     private IEnumerator OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Phantom") && checkConnection() == true)
@@ -30,6 +31,7 @@ public class collisionAnnotations : MonoBehaviour
         yield return null;
     }
 
+    //check continously to see if a connection has been made with the photon network
     private bool checkConnection()
     {
         if (FindObjectOfType<BooleanSync>() != null)
