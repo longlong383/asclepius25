@@ -10,7 +10,7 @@ public class collisionAnnotations : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("connection status: " + checkConnection());
-        // Example: Do something when an object enters the trigger
+        // Checks to make sure it's the patient mesh, and that a connection has been established with the photon network
         if (other.CompareTag("Phantom") && checkConnection() == true)
         {
             // Add custom logic for when a player enters the trigger
@@ -19,7 +19,7 @@ public class collisionAnnotations : MonoBehaviour
         }
     }
 
-    // Called when annotation tracker exist the patient mesh model
+    // Called when annotation tracker exits the patient mesh model
     private IEnumerator OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Phantom") && checkConnection() == true)

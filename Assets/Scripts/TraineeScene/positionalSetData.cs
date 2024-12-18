@@ -16,9 +16,11 @@ public class positionalSetData : MonoBehaviourPun
 
     void Start()
     {
+        patientOriginalLocation = new GameObject("PatientOriginalLocation").transform;
         patientOriginalLocation.position = patient.position;
         patientOriginalLocation.rotation = patient.rotation;
         patientOriginalLocation.localScale = patient.localScale;
+
         if (FindObjectOfType<BooleanSync>() != null)
         {
             booleanSync = FindObjectOfType<BooleanSync>();
@@ -31,9 +33,10 @@ public class positionalSetData : MonoBehaviourPun
         setView.OnClick.AddListener(() => changeVisibility(setView.IsToggled));
     }
 
-    private void changeVisibility(bool placeHolder)
+    public void changeVisibility(bool placeHolder)
     {
-        patient.GetComponent<GameObject>().SetActive(placeHolder);
+        Debug.Log("did i get clicked");
+        patient.gameObject.SetActive(placeHolder);
     }
 
     public void setNewLocation()

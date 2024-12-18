@@ -45,12 +45,10 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     [HideInInspector] public string annotationName;
 
     //gameObjects in scene to reset upon command
-    public List <Transform> thingsToReset = new List<Transform>();
+    [SerializeField] private Transform body;
 
-    //original positions of the gameObjects at the start of gameplay from thingsToReset
-    private List<Transform> storage = new List<Transform>();
+    private Transform originalBody;
 
-    public Transform torso;
 
     [HideInInspector] private Transform annotationTracker;
 
@@ -70,15 +68,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         CoreServices.InputSystem?.RegisterHandler<IMixedRealitySpeechHandler>(this);
         Debug1.text += "\nStarting Annotation System";
 
-        //Getting original positions of everything, and restore everything back to their original positions upon command
-        foreach (Transform og in thingsToReset)
-        {
-            // Instantiate creates a new GameObject, including the Transform, at the same position/rotation/scale
-            Transform copy = Instantiate(og, og.position, og.rotation);
-            copy.gameObject.SetActive(false);
-            // Optionally, add the new copy to a list for later use
-            storage.Add(copy);
-        }
+        originalBody = body;
     }
 
     //voice commands on receival from the MRTK Toolkit
@@ -138,12 +128,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     private void ResetScene()
     {
         Debug1.text += "\nResetting scene";
-        for (int i = 0; i < thingsToReset.Count; i++)
-        {
-            thingsToReset[i].position = storage[i].position;
-            thingsToReset[i].rotation = storage[i].rotation;
-            thingsToReset[i].localScale = storage[i].localScale;
-        }
+        body = originalBody;
         referenceSphere.GetComponent<Renderer>().material = offMaterial;
         destroyEverything();
     }
@@ -155,10 +140,15 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         {
             Destroy(child.gameObject);
         }
+
         foreach (Transform line in parentHolderLineRenderer.transform)
         {
-            Destroy(line.gameObject);
+            if (line.name.Length >= 8 && line.name.ToLower().Substring(0, 8) == "linerend")
+            {
+                Destroy(line.gameObject);
+            }
         }
+
         foreach (Transform block in startEndHolder.transform)
         {
             Destroy(block.gameObject);
@@ -221,17 +211,6 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             }
             Debug.Log("Instantiating annotation");
 
-            if (annotationTracker != null)
-            {
-                annotationTracker.transform.position = annotationObject.transform.position;
-            }
-            else
-            {
-                Debug.LogError("Transform annotation tracker not properly connected to network");
-                yield return null;
-            }
-            // Adding Line Renderer component
-
             // Get the current number of points in the Line Renderer
             int currentPoints = lineRenderer1.positionCount;
 
@@ -240,6 +219,21 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
             // Set the new point at the end of the Line Renderer
             lineRenderer1.SetPosition(currentPoints, annotationObject.transform.position);
+
+            if (annotationTracker != null)
+            {
+                // Convert the LineRenderer world position to local space of the annotationTracker's parent
+                Vector3 worldPosition = lineRenderer1.GetPosition(currentPoints);
+                Vector3 localPosition = annotationTracker.transform.parent.InverseTransformPoint(worldPosition);
+
+                // Assign the local position
+                annotationTracker.transform.localPosition = localPosition;
+            }
+            else
+            {
+                Debug.LogError("Transform annotation tracker not properly connected to network");
+                yield return null;
+            }
 
             //used to instantiate start block for the start of an annotation
             if (startBlockBool == true)

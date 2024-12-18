@@ -69,6 +69,8 @@ public class dataStreamer : MonoBehaviour
 
     private Transform transformationChanges;
 
+    [SerializeField] private Transform patient;
+
     void Start()
     {
         //setting default values for some variables
@@ -76,6 +78,7 @@ public class dataStreamer : MonoBehaviour
         startBlockBool = false;
         arrowCount = 0;
         lineRenderer1 = null;
+        
         if (FindObjectOfType<BooleanSync>() != null)
         {
             booleanSync = FindObjectOfType<BooleanSync>();
@@ -113,6 +116,7 @@ public class dataStreamer : MonoBehaviour
     //check to see if there are any position changes with the annotation tracker. If so, take that position, and add it to the queue
     private IEnumerator CheckPositionChanges()
     {
+        yield return new WaitForSeconds(0.25f);
         while (true)
         {
             Debug.Log("Tracking annotation tracker positional changes");
@@ -143,7 +147,6 @@ public class dataStreamer : MonoBehaviour
         {
             yield return null; // Wait for the next frame
         }
-
         // setting up the line renderer
         GameObject temp1 = Instantiate(lineRend);
         lineRenderer1 = temp1.GetComponent<LineRenderer>();
@@ -209,7 +212,7 @@ public class dataStreamer : MonoBehaviour
             Debug.Log("Connecting to network");
             yield return new WaitForSeconds(0.25f); // Check every 0.5 seconds
         }
-
+        patient.gameObject.GetComponent<ObjectManipulator>().enabled = true;
         Debug.Log("Network connected!");
         StartCoroutine(CheckBoolRoutine());
     }
@@ -292,12 +295,6 @@ public class dataStreamer : MonoBehaviour
 
     private void endBlock()
     {
-        //check to confirm that the index is within bounds
-        if (parentHolderLineRenderer.transform.childCount - 1 < 0)
-        {
-            Debug.LogError("End block method executed accidentally even though there are no line renderer components. Bug detected");
-        }
-
         //check to confirm that the index is within bounds
         if (parentHolderLineRenderer.transform.childCount - 1 < 0)
         {

@@ -100,7 +100,10 @@ public class changeDetectionTraineeScene : MonoBehaviour
         }
         foreach (Transform line in parentHolderLineRenderer.transform)
         {
-            Destroy(line.gameObject);
+            if (line.name.Length >= 8 && line.name.ToLower().Substring(0,8) == "linerend")
+            {
+                Destroy(line.gameObject);
+            }      
         }
         foreach (Transform block in startEndHolder.transform)
         {
