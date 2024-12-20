@@ -1,59 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Microsoft.MixedReality.Toolkit.UI;
 
+
 public class positionalSetData : MonoBehaviourPun
 {
-    private Transform patientOriginalLocation;
     [SerializeField] private Transform patient;
-    private Transform transformDifference;
-    private BooleanSync booleanSync;
-    [SerializeField] private Interactable setLocation, setView;
+    [SerializeField] private Interactable reset, setView;
+    [SerializeField] private Transform annotationDump;
 
     // Start is called before the first frame update
 
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+    private Vector3 initialScale;
+
     void Start()
     {
-        patientOriginalLocation = new GameObject("PatientOriginalLocation").transform;
-        patientOriginalLocation.position = patient.position;
-        patientOriginalLocation.rotation = patient.rotation;
-        patientOriginalLocation.localScale = patient.localScale;
+        initialPosition = patient.position;
+        initialRotation = patient.rotation;
+        initialScale = patient.localScale;
 
-        if (FindObjectOfType<BooleanSync>() != null)
-        {
-            booleanSync = FindObjectOfType<BooleanSync>();
-        }
-        else
-        {
-            Debug.LogError("Error retrieving boolean drawing condition. Gameplay will be affected");
-        }
-        setLocation.OnClick.AddListener(() => setNewLocation());
-        setView.OnClick.AddListener(() => changeVisibility(setView.IsToggled));
+        setView.OnClick.AddListener(() => changeVisibility(setView.IsToggled, patient, annotationDump));
+        reset.OnClick.AddListener(() => resetBody(reset.IsToggled));
     }
 
-    public void changeVisibility(bool placeHolder)
+    private void resetBody(bool placeHolder)
     {
-        Debug.Log("did i get clicked");
-        patient.gameObject.SetActive(placeHolder);
+        patient.position = initialPosition;
+        patient.rotation = initialRotation;
+        patient.localScale = initialScale;
     }
 
-    public void setNewLocation()
+    private void changeVisibility(bool placeHolder, Transform parent, Transform exception)
     {
-        Vector3 positionDifference = patient.position - patientOriginalLocation.position;
-        Quaternion rotationDifference = Quaternion.Inverse(patientOriginalLocation.rotation) * patient.rotation;
-        Vector3 scaleDifference = patient.lossyScale.Divide(patientOriginalLocation.lossyScale); // Component-wise division
-        Transform temp = null;
-        temp.transform.position = positionDifference;
-        temp.transform.rotation = rotationDifference;
-        //this might need to be changed to lossyscale in the future 
-        temp.transform.localScale = scaleDifference;
-        if (FindObjectOfType<dataStreamer>() == null)
+        parent.GetComponent<MeshRenderer>().enabled = placeHolder;
+        parent.GetComponent<ObjectManipulator>().enabled = placeHolder;
+        foreach (Transform child in parent)
         {
-            Debug.LogError("error finding datastreamer");
+            // Check if the child is the exception
+            if (child != exception)
+            {
+                child.gameObject.SetActive(placeHolder); // Ensure the exception is active
+            }
         }
-        dataStreamer streamer = FindObjectOfType<dataStreamer>();
-        streamer.setupTransformationChange(temp);
     }
 }

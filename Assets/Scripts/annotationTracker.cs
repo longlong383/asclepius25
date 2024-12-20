@@ -1,3 +1,4 @@
+using Microsoft.MixedReality.Toolkit.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class annotationTracker : MonoBehaviour
 
     private int previousChildCount;
 
+    [SerializeField] private Transform patient;
 
     private void Start()
     {
@@ -46,7 +48,7 @@ public class annotationTracker : MonoBehaviour
             // Wait for a short duration before checking again
             yield return new WaitForSeconds(0.1f);
         }
-
+        patient.gameObject.GetComponent<ObjectManipulator>().enabled = true;
         newChild.GetComponent<Transform>().SetParent(annotationTrackerParentHolder.transform);
         // Ensure the position and rotation reset after re-parenting
         newChild.transform.localPosition = Vector3.zero;

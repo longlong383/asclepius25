@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
+using Microsoft.MixedReality.Toolkit.UI;
 using TMPro;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
-using System.Security.Authentication.ExtendedProtection;
-
 
 
 public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
@@ -47,14 +44,18 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     //gameObjects in scene to reset upon command
     [SerializeField] private Transform body;
 
-    private Transform originalBody;
-
-
     [HideInInspector] private Transform annotationTracker;
 
     private BooleanSync booleanSync;
 
     private bool drewAtLeastOneArrow;
+
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+    private Vector3 initialScale;
+
+    private bool positionSetting;
+
     void Start()
     {
         //setting up variables
@@ -68,7 +69,10 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         CoreServices.InputSystem?.RegisterHandler<IMixedRealitySpeechHandler>(this);
         Debug1.text += "\nStarting Annotation System";
 
-        originalBody = body;
+        initialPosition = body.position;
+        initialRotation = body.rotation;
+        initialScale = body.localScale;
+        positionSetting = true;
     }
 
     //voice commands on receival from the MRTK Toolkit
@@ -92,10 +96,22 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             case "reset scene":
                 ResetScene();
                 break;
+            case "set position":
+                setPosition();
+                break;
             default:
                 Debug.Log($"Unknown option {eventData.Command.Keyword}");
                 break;
         }
+    }
+
+    private void setPosition()
+    {
+        // Toggle the positionSetting boolean
+        positionSetting = !positionSetting;
+
+        // Enable or disable the ObjectManipulator based on the new positionSetting value
+        body.GetComponent<ObjectManipulator>().enabled = positionSetting;
     }
 
     // Case-specific methods
@@ -128,7 +144,9 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     private void ResetScene()
     {
         Debug1.text += "\nResetting scene";
-        body = originalBody;
+        body.position = initialPosition;
+        body.rotation = initialRotation;
+        body.localScale = initialScale; 
         referenceSphere.GetComponent<Renderer>().material = offMaterial;
         destroyEverything();
     }

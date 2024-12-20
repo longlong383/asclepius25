@@ -69,7 +69,7 @@ public class dataStreamer : MonoBehaviour
 
     private Transform transformationChanges;
 
-    [SerializeField] private Transform patient;
+    //[SerializeField] private Transform patient;
 
     void Start()
     {
@@ -83,7 +83,6 @@ public class dataStreamer : MonoBehaviour
         {
             booleanSync = FindObjectOfType<BooleanSync>();
             StartCoroutine(CheckNetworkConnectionCoroutine());
-
         }
         else
         {
@@ -107,7 +106,6 @@ public class dataStreamer : MonoBehaviour
 
                 isProcessing = false;
             }
-
             // Yield to avoid blocking the main thread
             yield return null;
         }
@@ -130,6 +128,7 @@ public class dataStreamer : MonoBehaviour
             if (booleanSync.returnIsDrawing() == false)
             {
                 yield return new WaitForSeconds(0.25f);
+                while (transformTransport.Count > 0) ;
                 StopCoroutine(ProcessQueueContinuously());
                 endBlock();
                 break;
@@ -212,7 +211,7 @@ public class dataStreamer : MonoBehaviour
             Debug.Log("Connecting to network");
             yield return new WaitForSeconds(0.25f); // Check every 0.5 seconds
         }
-        patient.gameObject.GetComponent<ObjectManipulator>().enabled = true;
+        //patient.gameObject.GetComponent<ObjectManipulator>().enabled = true;
         Debug.Log("Network connected!");
         StartCoroutine(CheckBoolRoutine());
     }
@@ -270,6 +269,7 @@ public class dataStreamer : MonoBehaviour
             startBlock.transform.localScale = new Vector3(0.006f, 0.006f, 0.005f);
             startBlockBool = false;
         }
+
         //used to instantiate arrow prefabs along line renderer everying 40 frames
         else if (arrowCount == 2)
         {
@@ -288,9 +288,7 @@ public class dataStreamer : MonoBehaviour
             newAnnotation.transform.localScale = new Vector3(0.3f, 0.3f, 0.6f);
             arrowCount = 0;
             drewAtLeastOneArrow = true;
-        }
-        
-        
+        }     
     }
 
     private void endBlock()
@@ -344,12 +342,12 @@ public class dataStreamer : MonoBehaviour
         else
         {
             //scenario three
-
             endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
         }
         arrowCount = 0;
         //startBlockBool = true;
         drewAtLeastOneArrow = false;
+        //StopCoroutine(CheckPositionChanges());
         StartCoroutine(CheckBoolRoutine());
     }
 
@@ -360,11 +358,4 @@ public class dataStreamer : MonoBehaviour
 
         lastPosition = transform.position;
     }
-
-    //function to call the transformational change needed to be applied to annotations to account for positonal, rotational and scale changes
-    public void setupTransformationChange(Transform transform)
-    {
-        transformationChanges = transform;
-    }
-
 }
