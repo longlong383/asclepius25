@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
 using TMPro;
 using UnityEngine;
 
-
+//this file is for controlling the actual annotations on unity scene
+//functions like drawing the annotation and exporting the annotation details to a csv file
+//exports csv to storage
 
 public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 {
@@ -47,6 +50,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     //original positions of the gameObjects at the start of gameplay from thingsToReset
     private List<Transform> storage = new List<Transform>();
 
+    public Transform torso;
 
     void Start()
     {
@@ -74,52 +78,130 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     //void Update()
     //{
     //}
+    
+    //can also implement google drive api for more seamless uploads possibly.
+   // Call this function when you want to trigger sharing
+    public void ShareCSVFile(string filePath)
+    {
+        string csvFilePath = Path.Combine(Application.persistentDataPath, filePath);
+        
+        if (File.Exists(csvFilePath))
+        {
+            #if UNITY_ANDROID
+            ShareToAndroid("Check out this CSV file!", csvFilePath);
+            #elif UNITY_IOS
+            iOSShare.ShareToiOS(csvFilePath);
+            #else
+            Debug.Log("Sharing is not supported on this platform.");
+            Debug.Log($"Sharing file at: {filePath}");
+
+            #endif
+        }
+        else
+        {
+            Debug.LogError("CSV file does not exist at the specified path.");
+        }
+    }
+
+    // Android sharing method
+    public static void ShareToAndroid(string message, string filePath)
+    {
+#if UNITY_ANDROID
+        using (AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent"))
+        using (AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent"))
+        {
+            intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
+            using (AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri"))
+            {
+                AndroidJavaObject uri = uriClass.CallStatic<AndroidJavaObject>("parse", "file://" + filePath);
+                intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"), uri);
+                intentObject.Call<AndroidJavaObject>("setType", "application/csv");
+            }
+            using (AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+            using (AndroidJavaObject activity = unity.GetStatic<AndroidJavaObject>("currentActivity"))
+            {
+                activity.Call("startActivity", intentObject);
+            }
+        }
+#endif
+    }
+
+    // iOS sharing method
+    public class iOSShare
+    {
+        public static void ShareToiOS(string filePath)
+        {
+            #if UNITY_IOS
+            string path = filePath;
+            UnityEngine.iOS.Device.SetNoBackupFlag(path);
+            // Implement iOS sharing code here using a native plugin or custom sharing method.
+            #endif
+        }
+    }
+
+    
+    
 
     public void OnSpeechKeywordRecognized(SpeechEventData eventData)
     {
-        //voice command structure
         switch (eventData.Command.Keyword.ToLower())
         {
-            //annotations start to annotatte
             case "start to draw":
-                if (!draw)
-                {
-                    Debug1.text += "\nStarting to draw";
-                    Debug.Log("Starting to draw");
-                    draw = true;
-                    startBlockBool = true;
-                    StartCoroutine(InstantiateCoroutine());
-                }
+                StartDrawing();
                 break;
-            //stop annotating
             case "stop to draw":
-                endBlock();
-                ExportCoordinatesToCSV();
+                StopDrawing();
                 break;
-            //delete all annotations
             case "reset annotations":
-                Debug1.text += "\nResetting";
-                Debug.Log("Resetting");
-                endBlock();
-                destroyEverything();
+                ResetAnnotations();
                 break;
-            //reset entire scene
             case "reset scene":
-                Debug1.text += "\nResetting scene";
-                for (int i = 0; i < thingsToReset.Count; i++)
-                {
-                    thingsToReset[i].position = storage[i].position;
-                    thingsToReset[i].rotation = storage[i].rotation;
-                    thingsToReset[i].localScale = storage[i].localScale;
-                }
-                referenceSphere.GetComponent<Renderer>().material = offMaterial;
-                destroyEverything();
+                ResetScene();
                 break;
-
             default:
                 Debug.Log($"Unknown option {eventData.Command.Keyword}");
                 break;
         }
+    }
+
+    // Case-specific methods
+    public void StartDrawing()
+    {
+        if (!draw)
+        {
+            Debug1.text += "\nStarting to draw";
+            Debug.Log("Starting to draw");
+            draw = true;
+            startBlockBool = true;
+            StartCoroutine(InstantiateCoroutine());
+        }
+    }
+
+    public void StopDrawing()
+    {
+        endBlock();
+        ExportCoordinatesToCSV();
+    }
+
+    private void ResetAnnotations()
+    {
+        Debug1.text += "\nResetting";
+        Debug.Log("Resetting");
+        endBlock();
+        destroyEverything();
+    }
+
+    private void ResetScene()
+    {
+        Debug1.text += "\nResetting scene";
+        for (int i = 0; i < thingsToReset.Count; i++)
+        {
+            thingsToReset[i].position = storage[i].position;
+            thingsToReset[i].rotation = storage[i].rotation;
+            thingsToReset[i].localScale = storage[i].localScale;
+        }
+        referenceSphere.GetComponent<Renderer>().material = offMaterial;
+        destroyEverything();
     }
 
     //destroys all annotations
@@ -268,9 +350,20 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
         LineRenderer lineRenderer = lastChild.GetComponent<LineRenderer>();
 
+        //determine the file path for storage:
+        string filePathAnnotation; 
+            
         // Combine it with the filename you want to access
-        string filePathAnnotation = Path.Combine(Application.persistentDataPath, "Annotation_coordinates_line_renderer.csv");
-
+#if UNITY_ANDROID
+    filePathAnnotation = Path.Combine("/storage/emulated/0/Download", "Annotation_coordinates_line_renderer.csv");
+#elif UNITY_IOS
+    // On iOS, files are saved in the app's sandbox; modify as needed for exporting later
+    filePathAnnotation = Path.Combine(Application.persistentDataPath, "Annotation_coordinates_line_renderer.csv");
+#else
+        // Default to persistent data path for other platforms
+        filePathAnnotation = Path.Combine(Application.persistentDataPath, "Annotation_coordinates_line_renderer.csv");
+#endif
+        
         // Open or create the CSV file
         using (StreamWriter writer = new StreamWriter(filePathAnnotation, true))
         {
@@ -285,7 +378,15 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
              * Insertion
              * Exploration
              */
-            writer.WriteLine($"{annotationName}");
+            //Header
+            Debug1.text += $"\nAnnotation name: {annotationName}";
+
+            writer.WriteLine($"Annotation Name: {annotationName}");
+            writer.WriteLine("Index,Timestamp,X,Y,Z");
+
+            // Call this from your Unity C# script
+            // SHare("Check out this message!", "path/to/your/file.jpg");
+            
 
             // Loop through all the positions in the LineRenderer
             for (int i = 0; i < lineRenderer.positionCount; i++)
@@ -293,15 +394,25 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 // Get the position at index i
                 Vector3 position = lineRenderer.GetPosition(i);
 
-                // Write the index and coordinates to the CSV
-                writer.WriteLine($"{i},{position.x},{position.y},{position.z}");
+                // Get the current timestamp
+                string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
+                // Write the index, timestamp, and coordinates to the CSV
+                writer.WriteLine($"{i},{timestamp},{position.x},{position.y},{position.z}");
             }
             writer.WriteLine("end");
         }
 
+        //Share CSV File
+        ShareCSVFile(filePathAnnotation);
+        
         Debug.Log($"Coordinates exported to {filePathAnnotation}");
         Debug1.text += $"\nFile Path name: {filePathAnnotation}";
+        Debug1.text += $"\nTimestamp now: {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}";
+
     }
+    
+    
 
     //insignficant function for writing debug statements
     public void addText(string placeHolder)

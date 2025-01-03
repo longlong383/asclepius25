@@ -37,6 +37,7 @@ public class lineRendererColor : MonoBehaviour
     private void lineColorChange(Material lineMaterial, string annotationType)
     {
         //setting each button up such that it changes the annotation material color based on the button clicked
+        //updates annotationController variable
         if (annotationController.draw != true)
         {
             annotationController.lineRend.GetComponent<LineRenderer>().material = lineMaterial;
