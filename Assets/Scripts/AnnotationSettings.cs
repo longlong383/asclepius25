@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System.Drawing;
 
 //used for turning toggles on and off, specifically the arrows and the start and end blocks for the annotations
+//removed arrows as they are too distracting for precise annotations
 public class AnnotationSettings : MonoBehaviour
 {
     public GameObject /*verticeHolder,*/ startEndHolder;

@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb5431a5-9b61-4b04-84b0-be268baeb85c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/Vuforia/CylinderTargetTextures/VuforiaMars_Images/authoringinfo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/Vuforia/CylinderTargetTextures/VuforiaMars_Images/authoringinfo.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/Vuforia/torso/authoringinfo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/Vuforia/torso/authoringinfo.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/panicMaterials/annotationWarning.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/panicMaterials/annotationWarning.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/NetMQ.4.0.1.6/lib/net47/NetMQ.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/NetMQ.4.0.1.6/lib/net47/NetMQ.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/annotationDemo.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/annotationDemo.unity" afterDir="false" />
+    <list default="true" id="cb5431a5-9b61-4b04-84b0-be268baeb85c" name="Changes" comment="some changes to csv management">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DataLoader2.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DataLoader2.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AnnotationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AnnotationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AnnotationSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AnnotationSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/dataLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/dataLoader.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/lineRendererColor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/lineRendererColor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/XR/UserSimulationSettings/SimulationEnvironmentAssetsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/XR/UserSimulationSettings/SimulationEnvironmentAssetsManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,9 +47,11 @@
     <setting file="file://$PROJECT_DIR$/../../../GitHub/asclepius25/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnnotationSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnnotationSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/dataLoader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/lineRendererColor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMPro_Private.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProjectColorInfo">{
@@ -98,9 +94,17 @@
       <workItem from="1731365923000" duration="164000" />
       <workItem from="1731366105981" duration="18000" />
       <workItem from="1735063083113" duration="1366000" />
-      <workItem from="1735446421035" duration="15444000" />
+      <workItem from="1735446421035" duration="20583000" />
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="some changes to csv management">
+      <option name="closed" value="true" />
+      <created>1735880294607</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1735880294607</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,6 +129,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Merge pull request #2 from longlong383/Maria&#10;&#10;Maria" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge pull request #2 from longlong383/Maria&#10;&#10;Maria" />
+    <MESSAGE value="some changes to csv management" />
+    <option name="LAST_COMMIT_MESSAGE" value="some changes to csv management" />
   </component>
 </project>

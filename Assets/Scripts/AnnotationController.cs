@@ -221,6 +221,8 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         }
     }
     //continuously running function for annotating
+    //marks the line renders with arrows (which are now being kept out)
+    //
     private IEnumerator InstantiateCoroutine()
     {
         Debug1.text += "\nFirst Point";
@@ -290,7 +292,8 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             }
         }
     }
-
+    
+    
     private void endBlock()
     {
         //method used to access last linernedrer component in the linerendrerer dump

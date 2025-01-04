@@ -129,7 +129,6 @@ public class dataLoader : MonoBehaviour
             }
 
             
-            
 
             if (getInfo == true)
             {
