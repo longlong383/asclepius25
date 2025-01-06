@@ -45,13 +45,201 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../../GitHub/asclepius25/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Configs/MixedRealityToolkitConfigurationProfile.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Configs/MixedRealityToolkitConfigurationProfile.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Configs/MixedRealityToolkitConfigurationProfile.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Configs/MixedRealityToolkitConfigurationProfile.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Configs/MixedRealityToolkitConfigurationProfile.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Line Materials/viewAnnotation.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Line Materials/viewAnnotation.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Line Materials/viewAnnotation.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Line Materials/viewAnnotation.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Line Materials/viewAnnotation.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Line Materials/viewAnnotation.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Line Materials/viewAnnotation.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Line Materials/viewAnnotation.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Line Materials/viewAnnotation.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Line Materials/viewAnnotation.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Rod Material.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/Rod Material.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/deskMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/annotationWarning.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/annotationWarning.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Materials/panicMaterials/panicMaterial.mat.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/annotationDemo.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/annotationDemo.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/annotationDemo.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/annotationDemo.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/annotationDemo.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/annotationDemo.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/annotationDemo.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/annotationDemo.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/traineeScene.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/traineeScene.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/traineeScene.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/traineeScene.unity.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scenes/traineeScene.unity.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnnotationController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnnotationSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/AnnotationSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/dataLoader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/DataLoader2.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/SceneLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/SceneLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/SceneLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SceneLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/SceneLoader.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/SceneLoader.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/dataLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/dataLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/dataLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/dataLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/dataLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/dataLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/dataLoader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/lineRendererColor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMPro_Private.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/lineRendererColor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/lineRendererColor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/meshGrabber.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/meshGrabber.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/meshGrabber.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/meshGrabber.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/meshGrabber.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/meshGrabber.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/meshGrabber.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/meshGrabber.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/meshGrabber.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/meshGrabber.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/panicWarning.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/panicWarning.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/panicWarning.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/panicWarning.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/panicWarning.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/previousScripts/CalibrationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/CalibrationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/CalibrationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/CalibrationController.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/CalibrationController.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/CalibrationController.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/CalibrationController.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/CalibrationController.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/CalibrationController.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/CalibrationController.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/previousScripts/MatrixExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/MatrixExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/MatrixExtensions.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/OpenIGTLinkConnect.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/OpenIGTLinkFlag.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/OpenIGTLinkFlag.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/previousScripts/SetTransformFromMatrix.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/SetTransformFromMatrix.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/SetTransformFromMatrix.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/previousScripts/TrackingVisualization.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/TrackingVisualization.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Assets/Scripts/previousScripts/TrackingVisualization.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Library/Bee/fullprofile.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_MaterialManager.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_Text.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_Text.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_TextElement.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_TextElement.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_TextParsingUtilities.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_TextUtilities.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/Library/PackageCache/com.unity.textmeshpro@3.0.6/Tests.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/ProjectSettings/EditorBuildSettings.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/ProjectSettings/EditorBuildSettings.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/ProjectSettings/EditorBuildSettings.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/UserSettings/EditorUserSettings.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/e/Documents/yr4/capstone/code/UserSettings/MixedRealityOpenXRRemotingSettings.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://DataLoader2.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProjectColorInfo">{
@@ -66,12 +254,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "emen-branch2",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -120,7 +308,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="emen-branch2" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -131,5 +331,9 @@
     <MESSAGE value="Merge pull request #2 from longlong383/Maria&#10;&#10;Maria" />
     <MESSAGE value="some changes to csv management" />
     <option name="LAST_COMMIT_MESSAGE" value="some changes to csv management" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

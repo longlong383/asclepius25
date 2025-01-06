@@ -8,7 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DataLoader2 : MonoBehaviour
+public class DataLoader2 : MonoBehaviour 
 {
     public TMP_Text Debug1;
 
