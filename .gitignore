@@ -12,6 +12,7 @@
 /[Aa]pp/
 /[Aa]ppHL1/
 /[Aa]ppHL2/
+/[Uu]ser[Ss]ettings/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
