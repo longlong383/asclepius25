@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb5431a5-9b61-4b04-84b0-be268baeb85c" name="Changes" comment="some changes to csv management">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DataLoader2.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DataLoader2.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AnnotationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AnnotationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AnnotationSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AnnotationSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/dataLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/dataLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/lineRendererColor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/lineRendererColor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,6 +256,13 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
+    ]
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -283,6 +285,7 @@
       <workItem from="1731366105981" duration="18000" />
       <workItem from="1735063083113" duration="1366000" />
       <workItem from="1735446421035" duration="20583000" />
+      <workItem from="1736283981637" duration="468000" />
     </task>
     <task id="LOCAL-00002" summary="some changes to csv management">
       <option name="closed" value="true" />
@@ -292,7 +295,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735880294607</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="hopefully this is all that was commited before...">
+      <option name="closed" value="true" />
+      <created>1736203091400</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1736203091400</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,7 +341,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Merge pull request #2 from longlong383/Maria&#10;&#10;Maria" />
     <MESSAGE value="some changes to csv management" />
-    <option name="LAST_COMMIT_MESSAGE" value="some changes to csv management" />
+    <MESSAGE value="hopefully this is all that was commited before..." />
+    <option name="LAST_COMMIT_MESSAGE" value="hopefully this is all that was commited before..." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
