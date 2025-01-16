@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,14 +11,31 @@ public class AnnotationSettings : MonoBehaviour
 {
     public GameObject /*verticeHolder,*/ startEndHolder;
     public Interactable /*toggleVertice,*/ toggleStartEnd;
-    
+    private BooleanSync booleanSync;
     // Start is called before the first frame update
     void Start()
     {
         // toggleVertice.OnClick.AddListener(() => showVertices(toggleVertice.IsToggled));
         toggleStartEnd.OnClick.AddListener(() => showStartEnd(toggleStartEnd.IsToggled));
-        // toggleVertice.IsToggled = true;
+        destroyer.OnClick.AddListener(() => deleteAllAnnotations());
+        //toggleVertice.IsToggled = true;
         toggleStartEnd.IsToggled = true;
+        destroyer.IsToggled = true;
+        if(FindObjectsOfType<BooleanSync>() != null)
+        {
+            booleanSync = FindObjectOfType<BooleanSync>();
+        }
+    }
+    
+    // Update is called once per frame
+    void showVertices(bool placeHolder)
+    {
+        verticeHolder.SetActive(placeHolder);
+        if (booleanSync.returnIsConnected() == true)
+        {
+            Debug.Log(placeHolder);
+            booleanSync.setArrows(placeHolder);
+        }
     }
     
     // Update is called once per frame
@@ -28,9 +44,25 @@ public class AnnotationSettings : MonoBehaviour
     // {
     //     verticeHolder.SetActive(placeHolder);
     // }
-    
+
     void showStartEnd(bool placeHolder)
     {
         startEndHolder.SetActive(placeHolder);
+        if (booleanSync.returnIsConnected() == true)
+        {
+            Debug.Log(placeHolder);
+            booleanSync.setStartEndBlock(placeHolder);
+        }
     }
+
+    void deleteAllAnnotations()
+    {
+        if (FindObjectOfType<AnnotationController>() != null && booleanSync.returnIsConnected() == true)
+        {
+            AnnotationController annotationController = FindObjectOfType<AnnotationController>();
+            annotationController.callDestroyEverything();
+            booleanSync.setDeletion(true);
+        }
+    }
+
 }

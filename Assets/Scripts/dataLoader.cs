@@ -53,8 +53,12 @@ public class dataLoader : MonoBehaviour
     //List of line materials
     public List<Material> listMaterials = new List<Material> ();
 
-    //test button
+    ////test button
     public Interactable button;
+
+    //[SerializeField] private GameObject annotationTrackerParentHolder;
+
+    private int previousChildCount;
     void Start()
     {
         //setting default values for some variables

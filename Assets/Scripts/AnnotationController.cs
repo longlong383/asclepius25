@@ -6,6 +6,8 @@ using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
 using TMPro;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 //this file is for controlling the actual annotations on unity scene
 //functions like drawing the annotation and exporting the annotation details to a csv file
@@ -52,12 +54,18 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     public Transform torso;
 
+    [HideInInspector] public Transform annotationTracker;
+
+    private BooleanSync booleanSync;
+
     void Start()
     {
         //setting up variables
         annotationName = null;
         draw = false;
         startBlockBool = false;
+
+        annotationTracker = null;
 
         //accessing speech handlder
         CoreServices.InputSystem?.RegisterHandler<IMixedRealitySpeechHandler>(this);
@@ -144,6 +152,10 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
 
     public void OnSpeechKeywordRecognized(SpeechEventData eventData)
     {
+        if (checkConnection() == false)
+        {
+            return;
+        }
         switch (eventData.Command.Keyword.ToLower())
         {
             case "start to draw":
@@ -220,11 +232,36 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             Destroy(block.gameObject);
         }
     }
+
+    public void callDestroyEverything()
+    {
+        destroyEverything();
+    }
+
     //continuously running function for annotating
     //marks the line renders with arrows (which are now being kept out)
     //
     private IEnumerator InstantiateCoroutine()
     {
+        if (FindObjectOfType<BooleanSync>() == null)
+        {
+            StopAllCoroutines();
+        }
+
+        booleanSync = FindObjectOfType<BooleanSync>();
+
+        if (booleanSync.returnIsConnected() == false)
+        {
+            StopAllCoroutines();
+        }
+
+        Debug.Log("boolean status before: " + booleanSync.returnIsDrawing());
+        booleanSync.setIsDrawing(true);
+        //mental note, it takes a bit of time for this bool to be sent to the network, hence the time delay is needed to provide
+        //an actual reading of the boolean
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("boolean status after: " + booleanSync.returnIsDrawing());
+
         Debug1.text += "\nFirst Point";
 
         //instantiating new annotating by creating new line renderer
@@ -236,7 +273,7 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
         //int value used to mark when 40 frames have been achieved
         int frameCountBall = 0;
         referenceSphere.GetComponent<Renderer>().material = onMaterial;
-
+        Debug.Log("annotationtype: " + booleanSync.returnAnnotationType());
         while (draw)
         {
             // Reset the frame count
@@ -251,7 +288,15 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             }
             Debug.Log("Instantiating annotation");
 
-
+            if (annotationTracker != null)
+            {
+                annotationTracker.transform.position = annotationObject.transform.position;
+            }
+            else
+            {
+                Debug.LogError("Transform annotation tracker not properly connected to network");
+                yield return null;
+            }
             // Adding Line Renderer component
 
             // Get the current number of points in the Line Renderer
@@ -292,10 +337,14 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
             }
         }
     }
-    
-    
+
     private void endBlock()
     {
+        if (checkConnection() == false)
+        {
+            return;
+        }
+
         //method used to access last linernedrer component in the linerendrerer dump
         Transform temp = parentHolderLineRenderer.transform.GetChild(parentHolderLineRenderer.transform.childCount -1);
         LineRenderer lastLine = temp.GetComponent<LineRenderer>();
@@ -334,6 +383,12 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
                 endBlock.transform.position = lastLine.GetPosition(lastLine.positionCount - 1);
             }
             referenceSphere.GetComponent<Renderer>().material = offMaterial;
+            if (FindObjectOfType<BooleanSync>() != null)
+            {
+                booleanSync = FindObjectOfType<BooleanSync>();
+
+                booleanSync.setIsDrawing(false);
+            }
             StopAllCoroutines();
         }
     }
@@ -421,5 +476,23 @@ public class AnnotationController : MonoBehaviour, IMixedRealitySpeechHandler
     public void addText(string placeHolder)
     {
         Debug1.text += $"\n{placeHolder}";
+    }
+
+    public void setupAnnotationTracker(Transform transform)
+    {
+        annotationTracker = transform;
+    }
+
+    private bool checkConnection()
+    {
+        if (FindObjectOfType<BooleanSync>() != null)
+        {
+            booleanSync = FindObjectOfType<BooleanSync>();
+            if (booleanSync.returnIsConnected() == true)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

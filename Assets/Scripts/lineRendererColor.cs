@@ -14,6 +14,9 @@ public class lineRendererColor : MonoBehaviour
     //used for accessing the public variables in the annotationController
     public AnnotationController annotationController;
     // Start is called before the first frame update
+
+    private BooleanSync booleanSync;
+
     void Start()
     {
         //accessing each color button
@@ -33,16 +36,26 @@ public class lineRendererColor : MonoBehaviour
         }
         //assigning default annotation type general correction for the csv
         annotationController.annotationName = colorButtons[0].name;
+
+        if (FindObjectOfType<BooleanSync>() == null)
+        {
+            Debug.Log("Error retrieving booleanSync script");
+        }
+        else
+        {
+            booleanSync = FindObjectOfType<BooleanSync>();
+        }
     }
       
     private void lineColorChange(Material lineMaterial, string annotationType)
     {
         //setting each button up such that it changes the annotation material color based on the button clicked
         //updates annotationController variable
-        if (annotationController.draw != true)
+        if (annotationController.draw != true && booleanSync.returnIsConnected() == true)
         {
             annotationController.lineRend.GetComponent<LineRenderer>().material = lineMaterial;
             annotationController.annotationName = annotationType;
+            booleanSync.setAnnotationType(annotationType);
         }
         else
         {
