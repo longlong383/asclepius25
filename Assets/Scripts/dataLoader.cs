@@ -8,6 +8,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//file used for loading data from CSV file
+//manages the behavior of the annotation lines
+
 public class dataLoader : MonoBehaviour
 {
     // Path to your CSV file in the persistent data path
@@ -42,7 +45,7 @@ public class dataLoader : MonoBehaviour
     public GameObject lineRend;
 
     //int used to track when to instantiate arrows
-    private int arrowCount;
+    //private int arrowCount;
 
     //reference to the line renderer being modified and updated
     private LineRenderer lineRenderer1;
@@ -60,7 +63,7 @@ public class dataLoader : MonoBehaviour
     {
         //setting default values for some variables
         startBlockBool = false;
-        arrowCount = 0;
+        //arrowCount = 0;
         //getting data
         try
         {
@@ -115,7 +118,7 @@ public class dataLoader : MonoBehaviour
                 lineRenderer1.startWidth = 0.002f;
                 lineRenderer1.endWidth = 0.002f;
                 startBlockBool = true;
-                arrowCount = 0;
+                //arrowCount = 0;
                 continue;
             }
             if (temp == "end")
@@ -129,7 +132,6 @@ public class dataLoader : MonoBehaviour
                 continue;
             }
 
-            
             
 
             if (getInfo == true)
@@ -237,7 +239,7 @@ public class dataLoader : MonoBehaviour
             // Set the new point at the end of the Line Renderer
             lineRenderer1.SetPosition(currentPoints, newPosition);
             //arrowCount is an int used to count and ensure that an arrow prefab is only instantiating once for every two annotation coordaintes
-            arrowCount++;
+            //arrowCount++;
         }
         catch (Exception e)
         {
@@ -255,10 +257,10 @@ public class dataLoader : MonoBehaviour
             startBlockBool = false;
         }
         //used to instantiate arrow prefabs along line renderer everying 40 frames
-        else if (arrowCount == 2)
+        /*else if (arrowCount == 2)
         {
             //getting the vector based off the points of the previous two line renderers
-            Vector3 direction = lineRenderer1.GetPosition(lineRenderer1.positionCount - 1) - lineRenderer1.GetPosition(lineRenderer1.positionCount - 2);
+            //Vector3 direction = lineRenderer1.GetPosition(lineRenderer1.positionCount - 1) - lineRenderer1.GetPosition(lineRenderer1.positionCount - 2);
 
             //adjusting the direction of the arrow
             Quaternion quaternion = Quaternion.LookRotation(direction);
@@ -271,7 +273,7 @@ public class dataLoader : MonoBehaviour
             newAnnotation.transform.SetParent(parentHolderBall.transform);
             newAnnotation.transform.localScale = new Vector3(0.3f, 0.3f, 0.6f);
             arrowCount = 0;
-        }
+        }*/
         
     }
 
@@ -295,6 +297,7 @@ public class dataLoader : MonoBehaviour
         /* scenario one, the last block's position is the same as the last arrow prefab, so it replaces it
         * scenario two, the last block's position is different compared to the last arrow prefab, so it instantiates at the last position of the line renderer
         */
+		//not using arrows, so ignore the first scenario (after switching to tablet
 
         if (lastChild.transform.position == lastLine.GetPosition(lastLine.positionCount - 1))
         {

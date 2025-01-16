@@ -2,6 +2,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 using System.Collections.Generic;
 using UnityEngine;
 //used for changing the colors of the annotations
+//(or more specifically changing the type of annotation)
 public class lineRendererColor : MonoBehaviour
 {
     //getting colors from the color of the icon buttons
@@ -49,6 +50,7 @@ public class lineRendererColor : MonoBehaviour
     private void lineColorChange(Material lineMaterial, string annotationType)
     {
         //setting each button up such that it changes the annotation material color based on the button clicked
+        //updates annotationController variable
         if (annotationController.draw != true && booleanSync.returnIsConnected() == true)
         {
             annotationController.lineRend.GetComponent<LineRenderer>().material = lineMaterial;
